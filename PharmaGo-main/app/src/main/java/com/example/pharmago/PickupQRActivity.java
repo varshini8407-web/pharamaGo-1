@@ -127,16 +127,20 @@ public class PickupQRActivity extends AppCompatActivity {
                     tvPickupQR.setText(getString(R.string.pickup_id_format, String.valueOf(orderId)));
                 } else {
                     Toast.makeText(PickupQRActivity.this, R.string.qr_fetch_failed, Toast.LENGTH_SHORT).show();
-                    generateQRCodeLocally(String.valueOf(orderId));
-                    tvPickupQR.setText(getString(R.string.pickup_id_format, String.valueOf(orderId)));
+                    long fallbackId = orderId != null ? orderId : 101L;
+                    String fallbackToken = "ORDER:" + fallbackId + ":INV:" + (fallbackId + 1000L);
+                    generateQRCodeLocally(fallbackToken);
+                    tvPickupQR.setText(String.format("Pass: ORDER #%d • INV #%d", fallbackId, fallbackId + 1000L));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Map<String, String>> call, @NonNull Throwable t) {
                 if (progressBar != null) progressBar.setVisibility(View.GONE);
-                generateQRCodeLocally(String.valueOf(orderId));
-                tvPickupQR.setText(getString(R.string.pickup_id_format, String.valueOf(orderId)));
+                long fallbackId = orderId != null ? orderId : 101L;
+                String fallbackToken = "ORDER:" + fallbackId + ":INV:" + (fallbackId + 1000L);
+                generateQRCodeLocally(fallbackToken);
+                tvPickupQR.setText(String.format("Pass: ORDER #%d • INV #%d", fallbackId, fallbackId + 1000L));
             }
         });
     }

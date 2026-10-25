@@ -79,17 +79,20 @@ public class OrderService {
             order.setPrescription(prescription);
         }
 
-        // 7. Generate QR Pickup Token if Takeaway
-        if (type == Order.OrderType.TAKEAWAY) {
-            order.setPickupToken(UUID.randomUUID().toString());
-        }
-
         // Link items to order
         for (OrderItem item : verifiedItems) {
             item.setOrder(order);
         }
 
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+        // 7. Generate QR Pickup Token if Takeaway
+        if (type == Order.OrderType.TAKEAWAY) {
+            savedOrder.setPickupToken("ORDER:" + savedOrder.getId() + ":INV:" + (savedOrder.getId() + 1000));
+            savedOrder = orderRepository.save(savedOrder);
+        }
+
+        return savedOrder;
     }
 
     public List<Order> getOrdersByUser(User user) {

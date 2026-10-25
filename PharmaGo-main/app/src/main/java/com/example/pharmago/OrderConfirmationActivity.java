@@ -252,6 +252,28 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                         .putLong("activeOrderPlacedTime", System.currentTimeMillis())
                         .apply();
             }
+
+            // Sync with local database so takeaway QR scanner instantly recognizes the order
+            long finalId = sOrderId != null ? sOrderId : 105L;
+            double pVal = 120.0;
+            if (price != null) {
+                try { pVal = Double.parseDouble(price.replaceAll("[^0-9.]", "")); } catch (Exception ignored) {}
+            }
+            com.example.pharmago.models.OrderModel om = new com.example.pharmago.models.OrderModel(
+                    finalId,
+                    "Priya Patel",
+                    "+91 98112 34567",
+                    orderType != null ? orderType.toUpperCase() : "TAKEAWAY",
+                    com.example.pharmago.models.OrderStatus.READY_FOR_PICKUP,
+                    "",
+                    pVal,
+                    "Today",
+                    pharmacyName != null ? pharmacyName : "Hospital Ground Floor Counter B",
+                    null
+            );
+            om.setQrCodeString("ORDER:" + finalId + ":INV:" + (finalId + 1000L));
+            om.setPaymentStatus("PAID ONLINE (" + (paymentMethod != null ? paymentMethod : "UPI") + ")");
+            com.example.pharmago.database.DatabaseConnection.getInstance(this).insertOrUpdateOrder(om);
         } catch (Exception e) {
             Log.e(TAG, "Failed to save order locally", e);
         }

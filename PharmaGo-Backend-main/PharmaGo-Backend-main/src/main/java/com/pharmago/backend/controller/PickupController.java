@@ -30,18 +30,31 @@ public class PickupController {
         }
 
         if (order.getPickupToken() == null) {
-            return ResponseEntity.badRequest().body("Pickup token not generated for this order.");
+            order.setPickupToken("ORDER:" + order.getId() + ":INV:" + (order.getId() + 1000));
+            orderRepository.save(order);
         }
 
         String qrBase64 = qrCodeService.generateQRCodeBase64(order.getPickupToken(), 300, 300);
         return ResponseEntity.ok(Map.of("qrCode", qrBase64));
     }
 
+    @PostMapping("/lookup")
+    public ResponseEntity<?> lookupPickup(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+        Order order = findOrderByTokenOrId(token);
+        if (order == null) {
+            return ResponseEntity.badRequest().body("No order found matching token: " + token);
+        }
+        return ResponseEntity.ok(order);
+    }
+
     @PostMapping("/validate")
     public ResponseEntity<?> validatePickup(@RequestBody Map<String, String> request) {
         String token = request.get("token");
-        Order order = orderRepository.findByPickupToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid Pickup Token"));
+        Order order = findOrderByTokenOrId(token);
+        if (order == null) {
+            return ResponseEntity.badRequest().body("Invalid Pickup Token");
+        }
 
         if (order.getStatus() == Order.OrderStatus.COMPLETED) {
             return ResponseEntity.badRequest().body("Order already collected.");
@@ -55,5 +68,36 @@ public class PickupController {
         orderRepository.save(order);
 
         return ResponseEntity.ok("Pickup successful! Order #" + order.getId() + " marked as completed.");
+    }
+
+    private Order findOrderByTokenOrId(String token) {
+        if (token == null || token.trim().isEmpty()) return null;
+        token = token.trim();
+
+        // 1. Exact match on pickupToken
+        Order order = orderRepository.findByPickupToken(token).orElse(null);
+        if (order != null) return order;
+
+        // 2. Extract ID from ORDER:<id>:INV:<invId>
+        if (token.toUpperCase().contains("ORDER:")) {
+            try {
+                String[] parts = token.split(":");
+                for (int i = 0; i < parts.length; i++) {
+                    if ("ORDER".equalsIgnoreCase(parts[i]) && i + 1 < parts.length) {
+                        long oId = Long.parseLong(parts[i + 1]);
+                        order = orderRepository.findById(oId).orElse(null);
+                        if (order != null) return order;
+                    }
+                }
+            } catch (Exception ignored) {}
+        }
+
+        // 3. Raw numeric ID
+        try {
+            long oId = Long.parseLong(token);
+            return orderRepository.findById(oId).orElse(null);
+        } catch (Exception ignored) {}
+
+        return null;
     }
 }

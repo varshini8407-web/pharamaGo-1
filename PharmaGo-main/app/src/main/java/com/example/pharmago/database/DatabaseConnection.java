@@ -32,7 +32,7 @@ import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 public class DatabaseConnection extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseConnection";
     private static final String DATABASE_NAME = "pharmago_hospital.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     private static DatabaseConnection instance;
 
@@ -234,7 +234,8 @@ public class DatabaseConnection extends SQLiteOpenHelper {
                     "(1, 'patient', 'admin', 'Priya Patel', '+91 98112 34567', 'PATIENT'), " +
                     "(2, 'ITA1024', 'admin', 'Dr. Arvind Sharma', '+91 94441 23456', 'PHARMACIST'), " +
                     "(3, 'AGENT-402', 'admin', 'Rajesh Kumar', '+91 98765 43210', 'DELIVERY'), " +
-                    "(4, 'admin', 'admin', 'System Admin', '+91 99999 88888', 'PATIENT')");
+                    "(4, 'admin', 'admin', 'System Admin', '+91 99999 88888', 'PATIENT'), " +
+                    "(5, 'DEL402', 'admin', 'Rajesh Kumar (Delivery Courier)', '+91 98765 43214', 'DELIVERY')");
 
             // Pre-seed standard clinical medicines
             stmt.execute("INSERT IGNORE INTO medicines (id, brand_name, generic_name, dosage, unit_price, stock_qty, batch_no, expiry_date, is_rx_required) VALUES " +
@@ -466,6 +467,91 @@ public class DatabaseConnection extends SQLiteOpenHelper {
         cv5.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
         cv5.put(COL_RX_REQUIRED, 0);
         db.insert(TABLE_ORDERS, null, cv5);
+
+        // Order 101: Takeaway Ready for Pickup
+        ContentValues cv101 = new ContentValues();
+        cv101.put(COL_ORDER_ID, 101L);
+        cv101.put(COL_PATIENT_NAME, "Priya Patel");
+        cv101.put(COL_PATIENT_PHONE, "+91 98112 34567");
+        cv101.put(COL_ORDER_TYPE, "TAKEAWAY");
+        cv101.put(COL_STATUS, OrderStatus.READY_FOR_PICKUP.name());
+        cv101.put(COL_PRESCRIPTION_URL, "");
+        cv101.put(COL_TOTAL_AMOUNT, 80.00);
+        cv101.put(COL_TIMESTAMP, "Today, 11:00 AM");
+        cv101.put(COL_ADDRESS, "Hospital Ground Floor Counter B");
+        cv101.put(COL_INVOICE_ID, 1101L);
+        cv101.put(COL_QR_STRING, "ORDER:101:INV:1101");
+        cv101.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
+        cv101.put(COL_RX_REQUIRED, 0);
+        db.insert(TABLE_ORDERS, null, cv101);
+
+        // Order 102: Takeaway Ready for Pickup (Standard Client Pickup Demo)
+        ContentValues cv102 = new ContentValues();
+        cv102.put(COL_ORDER_ID, 102L);
+        cv102.put(COL_PATIENT_NAME, "Priya Patel");
+        cv102.put(COL_PATIENT_PHONE, "+91 98112 34567");
+        cv102.put(COL_ORDER_TYPE, "TAKEAWAY");
+        cv102.put(COL_STATUS, OrderStatus.READY_FOR_PICKUP.name());
+        cv102.put(COL_PRESCRIPTION_URL, "");
+        cv102.put(COL_TOTAL_AMOUNT, 135.00);
+        cv102.put(COL_TIMESTAMP, "Today, 11:30 AM");
+        cv102.put(COL_ADDRESS, "Hospital Ground Floor Counter B");
+        cv102.put(COL_INVOICE_ID, 1102L);
+        cv102.put(COL_QR_STRING, "ORDER:102:INV:1102");
+        cv102.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
+        cv102.put(COL_RX_REQUIRED, 0);
+        db.insert(TABLE_ORDERS, null, cv102);
+
+        // Order 105: Takeaway Ready for Pickup
+        ContentValues cv105 = new ContentValues();
+        cv105.put(COL_ORDER_ID, 105L);
+        cv105.put(COL_PATIENT_NAME, "Priya Patel");
+        cv105.put(COL_PATIENT_PHONE, "+91 98112 34567");
+        cv105.put(COL_ORDER_TYPE, "TAKEAWAY");
+        cv105.put(COL_STATUS, OrderStatus.READY_FOR_PICKUP.name());
+        cv105.put(COL_PRESCRIPTION_URL, "");
+        cv105.put(COL_TOTAL_AMOUNT, 95.00);
+        cv105.put(COL_TIMESTAMP, "Today, 12:15 PM");
+        cv105.put(COL_ADDRESS, "Hospital Ground Floor Counter B");
+        cv105.put(COL_INVOICE_ID, 1105L);
+        cv105.put(COL_QR_STRING, "ORDER:105:INV:1105");
+        cv105.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
+        cv105.put(COL_RX_REQUIRED, 0);
+        db.insert(TABLE_ORDERS, null, cv105);
+
+        // Order 1: Live Spring Boot Sync Takeaway
+        ContentValues cvL1 = new ContentValues();
+        cvL1.put(COL_ORDER_ID, 1L);
+        cvL1.put(COL_PATIENT_NAME, "Priya Patel");
+        cvL1.put(COL_PATIENT_PHONE, "+91 98112 34567");
+        cvL1.put(COL_ORDER_TYPE, "TAKEAWAY");
+        cvL1.put(COL_STATUS, OrderStatus.READY_FOR_PICKUP.name());
+        cvL1.put(COL_PRESCRIPTION_URL, "");
+        cvL1.put(COL_TOTAL_AMOUNT, 80.00);
+        cvL1.put(COL_TIMESTAMP, "Today, 01:00 PM");
+        cvL1.put(COL_ADDRESS, "Hospital Ground Floor Counter B");
+        cvL1.put(COL_INVOICE_ID, 1001L);
+        cvL1.put(COL_QR_STRING, "ORDER:1:INV:1001");
+        cvL1.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
+        cvL1.put(COL_RX_REQUIRED, 0);
+        db.insert(TABLE_ORDERS, null, cvL1);
+
+        // Order 3: Live Spring Boot Sync Takeaway
+        ContentValues cvL3 = new ContentValues();
+        cvL3.put(COL_ORDER_ID, 3L);
+        cvL3.put(COL_PATIENT_NAME, "Sunita Rao");
+        cvL3.put(COL_PATIENT_PHONE, "+91 97401 23456");
+        cvL3.put(COL_ORDER_TYPE, "TAKEAWAY");
+        cvL3.put(COL_STATUS, OrderStatus.READY_FOR_PICKUP.name());
+        cvL3.put(COL_PRESCRIPTION_URL, "");
+        cvL3.put(COL_TOTAL_AMOUNT, 90.00);
+        cvL3.put(COL_TIMESTAMP, "Today, 02:30 PM");
+        cvL3.put(COL_ADDRESS, "Hospital Ground Floor Counter B");
+        cvL3.put(COL_INVOICE_ID, 1003L);
+        cvL3.put(COL_QR_STRING, "ORDER:3:INV:1003");
+        cvL3.put(COL_PAYMENT_STATUS, "PAID ONLINE (UPI)");
+        cvL3.put(COL_RX_REQUIRED, 0);
+        db.insert(TABLE_ORDERS, null, cvL3);
     }
 
     // ==========================================
@@ -567,44 +653,83 @@ public class DatabaseConnection extends SQLiteOpenHelper {
         return order;
     }
 
+    public synchronized void insertOrUpdateOrder(OrderModel order) {
+        if (order == null || order.getOrderId() == null) return;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(COL_ORDER_ID, order.getOrderId());
+            cv.put(COL_PATIENT_NAME, order.getPatientName() != null ? order.getPatientName() : "Patient");
+            cv.put(COL_PATIENT_PHONE, order.getPatientPhone() != null ? order.getPatientPhone() : "+91 98112 34567");
+            cv.put(COL_ORDER_TYPE, order.getOrderType() != null ? order.getOrderType() : "TAKEAWAY");
+            cv.put(COL_STATUS, order.getStatus() != null ? order.getStatus().name() : OrderStatus.READY_FOR_PICKUP.name());
+            cv.put(COL_PRESCRIPTION_URL, order.getPrescriptionImageUrl() != null ? order.getPrescriptionImageUrl() : "");
+            cv.put(COL_TOTAL_AMOUNT, order.getTotalAmount() != null ? order.getTotalAmount() : 120.00);
+            cv.put(COL_TIMESTAMP, order.getOrderTimestamp() != null ? order.getOrderTimestamp() : "Today");
+            cv.put(COL_ADDRESS, order.getDeliveryAddress() != null ? order.getDeliveryAddress() : "Hospital Ground Floor Counter B");
+            cv.put(COL_INVOICE_ID, order.getInvoiceId() != null ? order.getInvoiceId() : order.getOrderId() + 1000L);
+            cv.put(COL_QR_STRING, order.getQrString() != null ? order.getQrString() : "ORDER:" + order.getOrderId() + ":INV:" + (order.getOrderId() + 1000L));
+            cv.put(COL_PAYMENT_STATUS, order.getPaymentStatus() != null ? order.getPaymentStatus() : "PAID ONLINE (UPI)");
+            cv.put(COL_RX_REQUIRED, order.isPrescriptionRequired() ? 1 : 0);
+            db.insertWithOnConflict(TABLE_ORDERS, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
+            Log.i(TAG, "Order #" + order.getOrderId() + " synced into SQLite successfully.");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to insertOrUpdateOrder #" + order.getOrderId(), e);
+        }
+    }
+
     public synchronized OrderModel getOrderByQr(String qrString) {
         if (qrString == null || qrString.trim().isEmpty()) return null;
         qrString = qrString.trim();
 
-        // Extract order ID from "ORDER:<id>:INV:<invId>" or plain id
-        long orderId = -1;
-        try {
-            if (qrString.toUpperCase().contains("ORDER:")) {
-                String[] parts = qrString.split(":");
-                for (int i = 0; i < parts.length; i++) {
-                    if ("ORDER".equalsIgnoreCase(parts[i]) && i + 1 < parts.length) {
-                        orderId = Long.parseLong(parts[i + 1]);
-                        break;
-                    }
-                }
-            } else {
-                orderId = Long.parseLong(qrString.replaceAll("[^0-9]", ""));
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error parsing QR: " + qrString, e);
-        }
-
-        if (orderId > 0) {
-            return getOrderById(orderId);
-        }
-
-        // Direct fallback query on qr_string column
         SQLiteDatabase db = getReadableDatabase();
+
+        // 1. Direct query on exact qr_string column
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_ORDERS + " WHERE " + COL_QR_STRING + " = ?",
                 new String[]{qrString});
-        OrderModel order = null;
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                order = parseOrderCursor(cursor);
+                OrderModel order = parseOrderCursor(cursor);
+                cursor.close();
+                return order;
             }
             cursor.close();
         }
-        return order;
+
+        // 2. Parse Order ID with regex helper
+        Long parsedId = com.example.pharmago.utils.QRCodeScanner.parseOrderIdFromPayload(qrString);
+        if (parsedId != null && parsedId > 0) {
+            OrderModel order = getOrderById(parsedId);
+            if (order != null) return order;
+        }
+
+        // 3. Fallback LIKE search on qr_string column
+        if (parsedId != null && parsedId > 0) {
+            cursor = db.rawQuery("SELECT * FROM " + TABLE_ORDERS + " WHERE " + COL_QR_STRING + " LIKE ? OR " + COL_ORDER_ID + " = ?",
+                    new String[]{"%ORDER:" + parsedId + "%", String.valueOf(parsedId)});
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    OrderModel order = parseOrderCursor(cursor);
+                    cursor.close();
+                    return order;
+                }
+                cursor.close();
+            }
+        }
+
+        // 4. Case-insensitive substring match
+        cursor = db.rawQuery("SELECT * FROM " + TABLE_ORDERS + " WHERE " + COL_QR_STRING + " LIKE ?",
+                new String[]{"%" + qrString + "%"});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                OrderModel order = parseOrderCursor(cursor);
+                cursor.close();
+                return order;
+            }
+            cursor.close();
+        }
+
+        return null;
     }
 
     private OrderModel parseOrderCursor(Cursor cursor) {

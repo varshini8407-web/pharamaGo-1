@@ -166,7 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Delivery Agent Portal (AGENT-402) 🛵"
+                    android:text="Delivery Agent Portal (DEL402) 🛵"
                     android:textAllCaps="false"
                     android:textSize="13.5sp"
                     android:textStyle="bold"

@@ -38,28 +38,21 @@ public class QRCodeScanner {
 
         String cleaned = payload.trim();
 
-        // Standard requirement: "ORDER:<orderId>:INV:<invoiceId>"
-        if (cleaned.toUpperCase().startsWith("ORDER:")) {
+        // Regex 1: ORDER:<id> or ORDER #<id> or ORDER-<id>
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("(?i)order[:#\\s-]*(\\d+)", java.util.regex.Pattern.CASE_INSENSITIVE);
+        java.util.regex.Matcher matcher = pattern.matcher(cleaned);
+        if (matcher.find()) {
             try {
-                String[] parts = cleaned.split(":");
-                if (parts.length >= 2) {
-                    return Long.parseLong(parts[1]);
-                }
+                return Long.parseLong(matcher.group(1));
             } catch (Exception ignored) {}
         }
 
-        // Format: "PHARMAGO-PICKUP-ORDER-<orderId>"
-        if (cleaned.toUpperCase().contains("ORDER-")) {
+        // Regex 2: Raw number string only (e.g., "102" or "8090")
+        if (cleaned.matches("^\\d{1,10}$")) {
             try {
-                String idPart = cleaned.substring(cleaned.lastIndexOf("ORDER-") + 6);
-                return Long.parseLong(idPart.replaceAll("[^0-9]", ""));
+                return Long.parseLong(cleaned);
             } catch (Exception ignored) {}
         }
-
-        // Raw numbers
-        try {
-            return Long.parseLong(cleaned.replaceAll("[^0-9]", ""));
-        } catch (Exception ignored) {}
 
         return null;
     }

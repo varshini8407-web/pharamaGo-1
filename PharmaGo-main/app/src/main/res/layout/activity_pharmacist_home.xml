@@ -80,6 +80,17 @@
                         android:padding="8dp"
                         android:src="@drawable/ic_refresh"
                         app:tint="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/btnPharmacistProfileNav"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Profile"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_nav_profile"
+                        app:tint="@color/white" />
                 </LinearLayout>
 
                 <!-- Branch & Availability Control -->

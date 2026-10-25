@@ -23,8 +23,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etFullName, etUsername, etEmail, etRegisterPhone, etRegisterPassword, etConfirmPassword;
     Button btnRegister;
-    TextView tvLogin;
+    TextView tvLogin, tvRoleHint;
+    com.google.android.material.button.MaterialButtonToggleGroup toggleRoleGroup;
     ApiService apiService;
+    private String selectedRole = "CUSTOMER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,31 @@ public class RegisterActivity extends AppCompatActivity {
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.tvLogin);
+        tvRoleHint = findViewById(R.id.tvRoleHint);
+        toggleRoleGroup = findViewById(R.id.toggleRoleGroup);
+
+        if (toggleRoleGroup != null) {
+            toggleRoleGroup.check(R.id.btnRolePatient);
+            toggleRoleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+                if (!isChecked) return;
+                if (checkedId == R.id.btnRolePatient) {
+                    selectedRole = "CUSTOMER";
+                    if (tvRoleHint != null) tvRoleHint.setText("Standard patient account for medicines and pickup passes.");
+                    if (etUsername != null) etUsername.setHint("Username");
+                    if (btnRegister != null) btnRegister.setText("Create Patient Account");
+                } else if (checkedId == R.id.btnRolePharmacist) {
+                    selectedRole = "PHARMACIST";
+                    if (tvRoleHint != null) tvRoleHint.setText("Hospital staff ID must start with 'ITA' (e.g. ITA1024).");
+                    if (etUsername != null) etUsername.setHint("Staff ID (e.g. ITA1024)");
+                    if (btnRegister != null) btnRegister.setText("Register Pharmacist (ITA)");
+                } else if (checkedId == R.id.btnRoleDelivery) {
+                    selectedRole = "DELIVERY";
+                    if (tvRoleHint != null) tvRoleHint.setText("Delivery courier ID must start with 'DEL' (e.g. DEL402).");
+                    if (etUsername != null) etUsername.setHint("Courier ID (e.g. DEL402)");
+                    if (btnRegister != null) btnRegister.setText("Register Delivery Courier (DEL)");
+                }
+            });
+        }
 
         apiService = RetrofitClient.getClient().create(ApiService.class);
 
@@ -153,25 +180,39 @@ public class RegisterActivity extends AppCompatActivity {
             btnRegister.setText("Registering via JDBC...");
         }
 
-        // Requirement 3: Enforce that pharmacists have the "ITA" prefix before inserting
-        boolean isPharmacistIntent = username.toLowerCase().contains("pharmacist") ||
-                email.toLowerCase().contains("pharmacist") ||
+        // Enforce role-based ID prefixes
+        boolean isPharmacistIntent = "PHARMACIST".equalsIgnoreCase(selectedRole) ||
                 username.toUpperCase().startsWith("ITA");
+        boolean isDeliveryIntent = "DELIVERY".equalsIgnoreCase(selectedRole) ||
+                username.toUpperCase().startsWith("DEL");
 
         if (isPharmacistIntent && !username.toUpperCase().startsWith("ITA")) {
             if (btnRegister != null) {
                 btnRegister.setEnabled(true);
-                btnRegister.setText("REGISTER");
+                btnRegister.setText("Register Pharmacist (ITA)");
             }
             if (etUsername != null) {
                 etUsername.setError("Pharmacist staff ID must begin with prefix 'ITA' (e.g. ITA1024)");
                 etUsername.requestFocus();
             }
-            Toast.makeText(this, "Pharmacist registration requires 'ITA' prefix", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Pharmacist registration requires 'ITA' prefix (e.g. ITA1024)", Toast.LENGTH_LONG).show();
             return;
         }
 
-        String role = isPharmacistIntent ? "PHARMACIST" : "CUSTOMER";
+        if (isDeliveryIntent && !username.toUpperCase().startsWith("DEL")) {
+            if (btnRegister != null) {
+                btnRegister.setEnabled(true);
+                btnRegister.setText("Register Delivery Courier (DEL)");
+            }
+            if (etUsername != null) {
+                etUsername.setError("Delivery username must begin with prefix 'DEL' (e.g. DEL402)");
+                etUsername.requestFocus();
+            }
+            Toast.makeText(this, "Delivery agent username must start with prefix 'DEL' (e.g. DEL402)", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String role = isPharmacistIntent ? "PHARMACIST" : (isDeliveryIntent ? "DELIVERY" : "CUSTOMER");
 
         com.example.pharmago.services.BackendService.getInstance(this).registerUser(
                 username,

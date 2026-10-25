@@ -71,13 +71,20 @@ public class BackendService {
                              String phone, String role, DbCallback<Boolean> callback) {
         boolean isPharmacist = "PHARMACIST".equalsIgnoreCase(role) ||
                 (username != null && username.toUpperCase().startsWith("ITA"));
+        boolean isDelivery = "DELIVERY".equalsIgnoreCase(role) ||
+                (username != null && username.toUpperCase().startsWith("DEL"));
 
         if ("PHARMACIST".equalsIgnoreCase(role) && (username == null || !username.toUpperCase().startsWith("ITA"))) {
             postFailure(callback, new IllegalArgumentException("Pharmacist staff ID must begin with prefix 'ITA' (e.g. ITA1024)"));
             return;
         }
 
-        final String finalRole = isPharmacist ? "PHARMACIST" : (role != null ? role.toUpperCase() : "PATIENT");
+        if ("DELIVERY".equalsIgnoreCase(role) && (username == null || !username.toUpperCase().startsWith("DEL"))) {
+            postFailure(callback, new IllegalArgumentException("Delivery agent username must begin with prefix 'DEL' (e.g. DEL402)"));
+            return;
+        }
+
+        final String finalRole = isPharmacist ? "PHARMACIST" : (isDelivery ? "DELIVERY" : (role != null ? role.toUpperCase() : "PATIENT"));
 
         executorService.execute(() -> {
             Connection conn = null;

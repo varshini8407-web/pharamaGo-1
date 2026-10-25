@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (btnDeliveryAgentPortal != null) {
-            btnDeliveryAgentPortal.setOnClickListener(v -> performLogin("AGENT-402", "admin"));
+            btnDeliveryAgentPortal.setOnClickListener(v -> performLogin("DEL402", "admin"));
         }
 
         // Provide convenient demo default credentials for Phase 1 UI testing

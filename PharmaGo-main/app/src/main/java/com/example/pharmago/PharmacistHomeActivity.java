@@ -103,6 +103,14 @@ public class PharmacistHomeActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        View btnPharmacistProfileNav = findViewById(R.id.btnPharmacistProfileNav);
+        if (btnPharmacistProfileNav != null) {
+            btnPharmacistProfileNav.setOnClickListener(v -> startActivity(new Intent(this, PharmacistProfileActivity.class)));
+        }
+        if (tvStaffId != null) {
+            tvStaffId.setOnClickListener(v -> startActivity(new Intent(this, PharmacistProfileActivity.class)));
+        }
+
         btnPharmacistLogout.setOnClickListener(v -> {
             Intent intent = new Intent(PharmacistHomeActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

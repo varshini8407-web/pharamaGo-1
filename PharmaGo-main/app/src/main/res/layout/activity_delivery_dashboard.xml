@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Rajesh Kumar • AGENT-402"
+                        android:text="Rajesh Kumar • DEL402"
                         android:textColor="@color/white"
                         android:textSize="17.5sp" />
                 </LinearLayout>
@@ -72,6 +72,17 @@
                     android:contentDescription="Refresh"
                     android:padding="8dp"
                     android:src="@drawable/ic_refresh"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/btnDeliveryProfileNav"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Profile"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_nav_profile"
                     app:tint="@color/white" />
             </LinearLayout>
 

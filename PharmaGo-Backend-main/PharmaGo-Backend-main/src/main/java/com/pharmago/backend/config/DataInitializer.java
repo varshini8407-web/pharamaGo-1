@@ -59,6 +59,9 @@ public class DataInitializer implements CommandLineRunner {
         User deliveryAgent = initUser("AGENT-402", "Rajesh Kumar", "9876543212", "agent.rajesh@pharmago.com",
                 "admin", "Bangalore Central Hub", User.Role.DELIVERY);
 
+        User deliveryAgentDel = initUser("DEL402", "Rajesh Kumar", "9876543214", "del402@pharmago.com",
+                "admin", "Bangalore Central Hub", User.Role.DELIVERY);
+
         User admin = initUser("admin", "System Administrator", "9876543213", "admin@pharmago.com",
                 "admin", "Headquarters", User.Role.ADMIN);
 

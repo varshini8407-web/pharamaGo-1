@@ -1,6 +1,7 @@
 package com.example.pharmago;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
@@ -162,6 +163,19 @@ public class DeliveryDashboardActivity extends AppCompatActivity implements Deli
 
         // Top refresh button
         btnRefreshDeliveryDashboard.setOnClickListener(v -> loadOrdersAndMetrics(true));
+
+        // Profile button navigation
+        View btnDeliveryProfileNav = findViewById(R.id.btnDeliveryProfileNav);
+        if (btnDeliveryProfileNav != null) {
+            btnDeliveryProfileNav.setOnClickListener(v -> startActivity(new Intent(this, DeliveryProfileActivity.class)));
+        }
+        if (tvDeliveryAgentName != null) {
+            SharedPreferences prefs = getSharedPreferences("PharmaGoPrefs", MODE_PRIVATE);
+            String uName = prefs.getString("username", "DEL402");
+            String fName = prefs.getString("fullName", "Rajesh Kumar");
+            tvDeliveryAgentName.setText(fName + " • " + uName);
+            tvDeliveryAgentName.setOnClickListener(v -> startActivity(new Intent(this, DeliveryProfileActivity.class)));
+        }
 
         // SwipeRefresh pull-to-refresh
         swipeRefreshDelivery.setOnRefreshListener(() -> loadOrdersAndMetrics(true));
