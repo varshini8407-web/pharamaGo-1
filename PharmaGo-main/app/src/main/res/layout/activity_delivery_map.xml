@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_surface">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Map Container / Simulated Live Navigation Canvas -->
+        <FrameLayout
+            android:id="@+id/mapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E2E8F0">
+
+            <!-- Simulated Live GPS Navigation Canvas Background -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Road Network Grid Simulation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#E6ECF5" />
+
+                <!-- Road Lines -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:background="#CBD5E1" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:background="#CBD5E1" />
+
+                <!-- Diagonal Active Route Polyline -->
+                <View
+                    android:id="@+id/viewLiveRouteLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/primary_clinical_blue" />
+
+                <!-- Pickup Pharmacy Marker -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="36dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/primary_clinical_blue"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="6dp">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_hospital"
+                            app:tint="@color/white" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="@color/card_surface"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:text="Pharmacy"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- Patient Destination Drop Marker -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="36dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/danger_alert"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="6dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/white" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="@color/card_surface"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:text="Customer Drop"
+                        android:textColor="@color/danger_alert"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- Courier Scooter Position Marker -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardCourierPositionMarker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    app:cardBackgroundColor="@color/secondary_mint"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp">
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_delivery"
+                        app:tint="@color/white" />
+                </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
+        </FrameLayout>
+
+        <!-- Top Navigation Bar & Action Icons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="12dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnBackFromMap"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/card_surface"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="4dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/neutral_dark" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/card_surface"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/tvMapOrderIdTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Navigating: Order #8093"
+                    android:textColor="@color/neutral_dark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvMapEtaSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Estimated Delivery: 11 mins • 2.8 km"
+                    android:textColor="@color/secondary_mint"
+                    android:textSize="11.5sp" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnOpenExternalGoogleMaps"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/primary_clinical_blue"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="4dp">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Floating Quick Dial FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCallCustomerFromMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/cardMapCustomerOverlay"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="14dp"
+            android:backgroundTint="@color/secondary_mint"
+            android:contentDescription="Call Customer"
+            app:elevation="6dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_phone"
+            app:tint="@color/white" />
+
+        <!-- Bottom Destination Overlay Card & Arrived Button -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMapCustomerOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/card_surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:strokeColor="@color/border_outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <!-- Customer Details -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvMapCustomerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Priya Patel"
+                            android:textColor="@color/neutral_dark"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvMapCustomerPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="+91 98112 34567"
+                            android:textColor="@color/neutral_muted"
+                            android:textSize="12.5sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvMapPaymentBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="@color/secondary_container"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="PAID ONLINE"
+                        android:textColor="@color/on_secondary_container"
+                        android:textSize="11.5sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/border_outline" />
+
+                <!-- Address -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="DELIVERY ADDRESS"
+                    android:textColor="@color/neutral_muted"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.05" />
+
+                <TextView
+                    android:id="@+id/tvMapDeliveryAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Flat 402, Lotus Orchid, Sector 4, Metro City"
+                    android:textColor="@color/neutral_dark"
+                    android:textSize="13sp" />
+
+                <!-- Action Button: Arrived at Customer Doorstep -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnArrivedAtCustomerDoorstep"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/secondary_mint"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Arrived at Customer Doorstep 🚪"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_check_circle"
+                    app:iconTint="@color/white" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

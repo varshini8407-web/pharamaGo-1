@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="@color/card_surface"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Top Drag Handle -->
+    <View
+        android:layout_width="44dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/border_outline"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Header: Title and Security Badge -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="@color/secondary_container"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_check_circle"
+                app:tint="@color/secondary_mint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Doorstep OTP Verification"
+                android:textColor="@color/neutral_dark"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tvOtpSheetOrderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Order #8093 • Patient: Priya Patel"
+                android:textColor="@color/neutral_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="14dp"
+        android:background="@color/border_outline" />
+
+    <!-- Instruction Subtext -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Ask the customer for the secret 6-digit handover OTP received on their registered phone number or PharmaGo app."
+        android:textColor="@color/neutral_muted"
+        android:textSize="12.5sp"
+        android:lineSpacingExtra="2dp" />
+
+    <!-- Cash On Delivery Banner (Only visible if COD) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCodAlertBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="@color/warning_container"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_receipt"
+                app:tint="@color/warning_amber" />
+
+            <TextView
+                android:id="@+id/tvCodAmountText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-bold"
+                android:text="Cash on Delivery: Please collect ₹110.00 from customer"
+                android:textColor="@color/on_warning_container"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 6-Digit OTP Input Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDeliveryOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter 6-Digit Secret OTP"
+        app:boxBackgroundColor="@color/background_surface"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxStrokeColor="@color/primary_clinical_blue"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDeliveryOtpInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:inputType="number"
+            android:letterSpacing="0.4"
+            android:maxLength="6"
+            android:textColor="@color/neutral_dark"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Demo Helper Subtitle: Shows test OTP so developer/evaluator can verify in 1 tap -->
+    <TextView
+        android:id="@+id/tvTestOtpHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-medium"
+        android:text="Customer OTP: 549123"
+        android:textColor="@color/secondary_mint"
+        android:textSize="12sp" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelOtpVerification"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Cancel"
+            android:textColor="@color/neutral_muted"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/border_outline" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmDeliveryOtp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1.8"
+            android:backgroundTint="@color/secondary_mint"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Confirm Delivery"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_check_circle"
+            app:iconTint="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="@color/card_surface"
+    android:padding="20dp">
+
+    <!-- Header: Courier Info & Online Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#FEE2E2">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_nav_profile"
+                app:tint="#DC2626"
+                android:contentDescription="Driver" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chandan Kumar Rajbhar"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Online • Delivering your order"
+                android:textSize="12sp"
+                android:textColor="@color/secondary_mint"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnCloseChatDialog"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close_circle"
+            app:tint="#94A3B8"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Close" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_outline"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Incoming Message Bubble from Driver -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="280dp"
+            android:orientation="vertical"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F1F5F9"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello! I have picked up your verified prescription medicines from Apollo Pharmacy. I am on my way to your address! 🛵"
+                android:textSize="13sp"
+                android:textColor="#1E293B"
+                android:lineSpacingExtra="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Just now"
+                android:textSize="10sp"
+                android:textColor="#94A3B8"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Outgoing / Sent Messages Container (Dynamically appended) -->
+    <LinearLayout
+        android:id="@+id/layoutChatReplies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Quick Reply Chips -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QUICK RESPONSES"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:textColor="@color/neutral_muted"
+        android:letterSpacing="0.05"
+        android:layout_marginBottom="8dp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipReplyHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I am at home 👍"
+                android:textColor="@color/primary_clinical_blue"
+                app:chipBackgroundColor="@color/primary_container"
+                app:chipStrokeWidth="0dp"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipReplyDoor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please leave at door 🚪"
+                android:textColor="@color/primary_clinical_blue"
+                app:chipBackgroundColor="@color/primary_container"
+                app:chipStrokeWidth="0dp"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipReplyCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Call me when you reach 📞"
+                android:textColor="@color/primary_clinical_blue"
+                app:chipBackgroundColor="@color/primary_container"
+                app:chipStrokeWidth="0dp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!-- Chat Input Box & Send Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etChatMessage"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8FAFC"
+            android:hint="Type a message to Chandan..."
+            android:textSize="13sp"
+            android:textColor="@color/neutral_dark"
+            android:textColorHint="@color/neutral_muted"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionSend" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSendChatMessage"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            app:cornerRadius="23dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:padding="0dp"
+            app:icon="@drawable/ic_send"
+            app:iconTint="#FFFFFF"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            android:backgroundTint="@color/primary_clinical_blue"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

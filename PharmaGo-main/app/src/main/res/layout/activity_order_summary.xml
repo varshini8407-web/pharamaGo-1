@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PharmaGo"
+            android:textColor="#176B4D"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order Summary &amp; Billing"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#202124"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="20dp"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/tvSummaryMedicine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medicine: "
+                android:textSize="17sp"
+                android:textColor="#202124"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvSummaryPharmacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pharmacy: "
+                android:textSize="17sp"
+                android:textColor="#202124"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvSummaryOrderType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Type: "
+                android:textSize="17sp"
+                android:textColor="#202124"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvSummaryPrescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prescription Status: "
+                android:textSize="17sp"
+                android:textColor="#202124"
+                android:paddingBottom="12dp" />
+
+            <LinearLayout
+                android:id="@+id/layoutDeliveryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DADCE0"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Address"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#5F6368"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etDeliveryAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter delivery address"
+                    android:textSize="16sp"
+                    android:inputType="textPostalAddress"
+                    android:padding="12dp"
+                    android:background="@android:drawable/editbox_background_normal" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DADCE0"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="18dp" />
+
+            <TextView
+                android:id="@+id/tvTotalBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Bill: ₹0"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#176B4D" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnProceedPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed to Payment"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:layout_marginTop="28dp"
+            android:padding="14dp"
+            android:backgroundTint="#176B4D"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Healthcare Clinical Palette (M3) -->
+    <color name="primary_clinical_blue">#0F56B3</color>
+    <color name="primary_container">#E6F0FA</color>
+    <color name="on_primary_container">#0A3B7B</color>
+
+    <color name="secondary_mint">#00A884</color>
+    <color name="secondary_container">#E0F7F2</color>
+    <color name="on_secondary_container">#005C48</color>
+
+    <color name="background_surface">#F8FAFC</color>
+    <color name="card_surface">#FFFFFF</color>
+
+    <color name="neutral_dark">#0F172A</color>
+    <color name="neutral_muted">#64748B</color>
+    <color name="border_outline">#E2E8F0</color>
+
+    <color name="danger_alert">#DC2626</color>
+    <color name="danger_container">#FEE2E2</color>
+    <color name="on_danger_container">#991B1B</color>
+
+    <color name="success_green">#10B981</color>
+    <color name="success_container">#D1FAE5</color>
+    <color name="on_success_container">#065F46</color>
+
+    <color name="warning_amber">#F59E0B</color>
+    <color name="warning_container">#FEF3C7</color>
+    <color name="on_warning_container">#92400E</color>
+
+    <!-- Navigation & Utility -->
+    <color name="nav_selected">#0F56B3</color>
+    <color name="nav_unselected">#94A3B8</color>
+    <color name="nav_indicator">#E6F0FA</color>
+
+    <!-- Standard Basics -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PharmaGo"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#176B4D"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Payment"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#202124"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/tvPaymentDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order details"
+            android:textSize="17sp"
+            android:textColor="#202124"
+            android:background="#FFFFFF"
+            android:padding="20dp"
+            android:elevation="3dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Payment Method"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#202124"
+            android:layout_marginBottom="12dp" />
+
+        <RadioGroup
+            android:id="@+id/rgPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/rbUpi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UPI"
+                android:textSize="17sp"
+                android:padding="8dp" />
+
+            <RadioButton
+                android:id="@+id/rbCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Debit / Credit Card"
+                android:textSize="17sp"
+                android:padding="8dp" />
+
+            <RadioButton
+                android:id="@+id/rbCash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cash on Delivery"
+                android:textSize="17sp"
+                android:padding="8dp" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnPayNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pay Now"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:padding="14dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#176B4D"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FB">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PharmaGo"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#176B4D"
+                android:layout_marginBottom="36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textSize="64sp"
+                android:textColor="#176B4D"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvConfirmationMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order placed successfully!"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#176B4D"
+                android:gravity="center"
+                android:layout_marginBottom="28dp" />
+
+            <TextView
+                android:id="@+id/tvConfirmedOrderDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order details"
+                android:textSize="17sp"
+                android:textColor="#202124"
+                android:background="#FFFFFF"
+                android:padding="20dp"
+                android:elevation="3dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinueOrder"
+                style="@style/Widget.PharmaGo.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Track Live Delivery 🛵"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:padding="12dp"
+                android:layout_marginTop="24dp" />
+
+            <Button
+                android:id="@+id/btnViewOrderHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Order History"
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:padding="14dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#176B4D" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</ScrollView>

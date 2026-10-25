@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_surface">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingBottom="190dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp">
+
+            <!-- Top Header & Greeting Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Perfectly Aligned Delivery Address Chip -->
+                    <LinearLayout
+                        android:id="@+id/layoutHomeLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/badge_bg"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_location"
+                            android:contentDescription="Location Pin"
+                            app:tint="@color/primary_clinical_blue" />
+
+                        <TextView
+                            android:id="@+id/tvHomeAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Home • Sector 4, Metro City"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/primary_clinical_blue"
+                            android:layout_marginStart="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" ▾"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/primary_clinical_blue"
+                            android:layout_marginStart="2dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello, Admin 👋"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
+
+                <!-- Notification Bell Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_outline"
+                    app:cardBackgroundColor="@color/card_surface"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/btnNotification"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="🔔"
+                        android:textSize="18sp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- User Profile Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_outline"
+                    app:cardBackgroundColor="@color/primary_container">
+
+                    <TextView
+                        android:id="@+id/btnProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="👤"
+                        android:textSize="18sp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Search Card / Input -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_nav_search"
+                        android:contentDescription="Search Icon"
+                        app:tint="@color/neutral_muted" />
+
+                    <EditText
+                        android:id="@+id/etHomeSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Search medicines, hospitals, symptoms..."
+                        android:textColor="@color/neutral_dark"
+                        android:textColorHint="@color/neutral_muted"
+                        android:textSize="14sp"
+                        android:background="@color/transparent"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="8dp"
+                        android:singleLine="true"
+                        android:imeOptions="actionSearch" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Takeaway vs Delivery Selector (MaterialButtonToggleGroup) -->
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleOrderType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:checkedButton="@id/btnDelivery"
+                app:selectionRequired="true"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDelivery"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="🚚 Doorstep Delivery"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="@color/border_outline"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTakeaway"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="🏥 Hospital Pickup"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="@color/border_outline"
+                    app:strokeWidth="1dp" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <!-- Hero Upload Prescription Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#BFDBFE"
+                app:cardBackgroundColor="@color/primary_container"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardCornerRadius="14dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/card_surface">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_upload_cloud"
+                                app:tint="@color/primary_clinical_blue"
+                                android:contentDescription="Upload" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Prescription Instant Scanner"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/neutral_dark" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Upload doctor's prescription. Our AI reads &amp; prepares your cart."
+                                android:textSize="12sp"
+                                android:textColor="@color/neutral_muted"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPrescription"
+                        style="@style/Widget.PharmaGo.Button.Primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Upload &amp; Auto-Order"
+                        android:textAllCaps="false"
+                        android:layout_marginTop="16dp"
+                        app:icon="@drawable/ic_nav_prescription"
+                        app:iconGravity="textStart"
+                        app:iconTint="@color/white" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Quick Healthcare Services Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Healthcare Services"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Row 1: Medicines & Hospitals -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="124dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="1dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_outline"
+                    app:cardBackgroundColor="@color/card_surface">
+
+                    <LinearLayout
+                        android:id="@+id/btnMedicine"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/ic_pill"
+                            app:tint="@color/primary_clinical_blue"
+                            android:contentDescription="Medicines" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Browse Medicines"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Verified Pharmacy Stock"
+                            android:textSize="11sp"
+                            android:textColor="@color/neutral_muted" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="124dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="1dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_outline"
+                    app:cardBackgroundColor="@color/card_surface">
+
+                    <LinearLayout
+                        android:id="@+id/btnPharmacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/ic_hospital"
+                            app:tint="@color/secondary_mint"
+                            android:contentDescription="Hospitals" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hospitals &amp; Stores"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Find Nearest Center"
+                            android:textSize="11sp"
+                            android:textColor="@color/neutral_muted" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Row 2: Live Tracking & Orders Banner -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:id="@+id/navOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/secondary_container">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_nav_orders"
+                            app:tint="@color/secondary_mint"
+                            android:contentDescription="Orders" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order History &amp; Live Tracking"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark" />
+
+                        <TextView
+                            android:id="@+id/tvNoOrders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Track active deliveries and pickup QR tokens"
+                            android:textSize="12sp"
+                            android:textColor="@color/neutral_muted" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View ›"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Pharmacist Verification Portal Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPharmacistPortalHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/primary_container">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_medical_cross"
+                            app:tint="@color/primary_clinical_blue"
+                            android:contentDescription="Pharmacist Portal" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pharmacist Verification Portal 🏥"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Staff ID: ITA1024 • Reconcile Rx &amp; Stock"
+                            android:textSize="12sp"
+                            android:textColor="@color/neutral_muted" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open ›"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/secondary_mint" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Hidden compatibility anchors to prevent broken ID references -->
+            <View
+                android:id="@+id/navHome"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+            <View
+                android:id="@+id/navSearch"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+            <View
+                android:id="@+id/navProfile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Live Tracking Bottom Card (Matching User Reference Image 2) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLiveTrackingHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="82dp"
+        android:visibility="gone"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="1.2dp"
+        app:strokeColor="#CBD5E1"
+        app:cardBackgroundColor="@color/card_surface"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Top Row: ARRIVING IN + Time, Scooter Icon, and Dismiss Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ARRIVING IN"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#64748B"
+                        android:letterSpacing="0.06" />
+
+                    <TextView
+                        android:id="@+id/tvHomeTrackingEta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11 mins"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#0F172A" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/ic_scooter_delivery"
+                    android:contentDescription="Scooter Delivery" />
+
+                <ImageView
+                    android:id="@+id/btnDismissHomeTracking"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_close_circle"
+                    app:tint="#94A3B8"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="Dismiss" />
+
+            </LinearLayout>
+
+            <!-- Teal/Mint Accent Progress Bar -->
+            <ProgressBar
+                android:id="@+id/pbHomeTracking"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:progress="65"
+                android:max="100"
+                android:progressTint="#00A884"
+                android:progressBackgroundTint="#E2E8F0"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Bottom Row: Your order is on the way 🤘 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvHomeTrackingStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Your order is on the way 🤘"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#1E293B" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Track Live ›"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_clinical_blue" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Elite Production-Grade BottomNavigationView -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom"
+        android:background="@color/card_surface"
+        app:elevation="12dp"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+        app:itemRippleColor="@color/primary_container"
+        app:labelVisibilityMode="labeled" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,83 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PharmaGo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/primary_clinical_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <item name="colorSecondary">@color/secondary_mint</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <!-- Surface & Background -->
+        <item name="android:colorBackground">@color/background_surface</item>
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/neutral_dark</item>
+        <item name="colorSurfaceVariant">@color/primary_container</item>
+        <item name="colorOnSurfaceVariant">@color/neutral_muted</item>
+        <item name="colorOutline">@color/border_outline</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/danger_alert</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- System Bars -->
+        <item name="android:statusBarColor">@color/background_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/card_surface</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.PharmaGo" parent="Base.Theme.PharmaGo" />
+
+    <!-- Outlined TextInputLayout Style -->
+    <style name="Widget.PharmaGo.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+        <item name="boxStrokeColor">@color/primary_clinical_blue</item>
+        <item name="hintTextColor">@color/primary_clinical_blue</item>
+        <item name="android:textColorHint">@color/neutral_muted</item>
+    </style>
+
+    <!-- Primary MaterialButton Style -->
+    <style name="Widget.PharmaGo.Button.Primary" parent="Widget.Material3.Button">
+        <item name="cornerRadius">14dp</item>
+        <item name="elevation">2dp</item>
+        <item name="backgroundTint">@color/primary_clinical_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <!-- Secondary MaterialButton Style -->
+    <style name="Widget.PharmaGo.Button.Secondary" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="android:textColor">@color/primary_clinical_blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Outlined Button Style -->
+    <style name="Widget.PharmaGo.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeColor">@color/border_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/neutral_dark</item>
+    </style>
+
+    <!-- Modern Elevated Card Style -->
+    <style name="Widget.PharmaGo.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="strokeColor">@color/border_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardBackgroundColor">@color/card_surface</item>
+    </style>
+</resources>

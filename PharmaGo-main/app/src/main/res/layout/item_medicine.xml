@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border_outline"
+    app:cardBackgroundColor="@color/card_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Rounded Icon Badge -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/primary_container">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_pill"
+                    app:tint="@color/primary_clinical_blue"
+                    android:contentDescription="Medicine icon" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:id="@+id/tvMedicineName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Paracetamol 500mg"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark" />
+
+                <TextView
+                    android:id="@+id/tvMedicineCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category: Analgesic / Antipyretic"
+                    android:textSize="12sp"
+                    android:textColor="@color/neutral_muted"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Dosage & Pharmacy Subtitle -->
+        <TextView
+            android:id="@+id/tvMedicineDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apollo Pharmacy • Fast relief for fever and mild to moderate pain"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted"
+            android:layout_marginTop="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_outline"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Pill Badge for In Stock / Prescription Status -->
+            <TextView
+                android:id="@+id/tvPrescriptionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✅ In Stock / OTC"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/success_green"
+                android:background="@drawable/badge_bg"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Action Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSelectMedicine"
+                style="@style/Widget.PharmaGo.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Select"
+                android:textSize="13sp"
+                android:textAllCaps="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                app:cornerRadius="10dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

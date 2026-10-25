@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1.2dp"
+    app:strokeColor="@color/border_outline"
+    app:cardBackgroundColor="@color/card_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header Row: Order ID, Type Badge, and Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <!-- Order ID -->
+            <TextView
+                android:id="@+id/tvPharmacistOrderId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order #8092"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark" />
+
+            <!-- Order Type Badge (TAKEAWAY vs DELIVERY) -->
+            <TextView
+                android:id="@+id/tvPharmacistOrderTypeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TAKEAWAY 🏥"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_clinical_blue"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/primary_container"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginEnd="6dp" />
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/tvPharmacistStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● PENDING VERIFICATION"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/warning_amber"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/warning_container"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
+
+        </LinearLayout>
+
+        <!-- Patient Details Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_nav_profile"
+                app:tint="@color/primary_clinical_blue"
+                android:contentDescription="Patient" />
+
+            <TextView
+                android:id="@+id/tvPharmacistPatientName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rahul Sharma"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:id="@+id/tvPharmacistPatientPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91 98765 43210"
+                android:textSize="12sp"
+                android:textColor="@color/neutral_muted" />
+
+        </LinearLayout>
+
+        <!-- Prescription & Timestamp Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/tvPharmacistOrderDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rx Uploaded • 2 Medicines • Total: ₹215.00"
+                android:textSize="12.5sp"
+                android:textColor="@color/neutral_muted" />
+
+            <TextView
+                android:id="@+id/tvPharmacistOrderTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today, 04:30 PM"
+                android:textSize="11.5sp"
+                android:textColor="@color/neutral_muted" />
+
+        </LinearLayout>
+
+        <!-- Destination / Pickup Location info -->
+        <TextView
+            android:id="@+id/tvPharmacistOrderLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📍 Hospital Ground Floor Counter B"
+            android:textSize="12sp"
+            android:textColor="@color/neutral_muted"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Security Token Badge if verified (QR info or OTP) -->
+        <LinearLayout
+            android:id="@+id/layoutSecurityTokenBadge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="@color/secondary_container"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivSecurityTokenIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_check_circle"
+                app:tint="@color/secondary_mint"
+                android:contentDescription="Token Icon" />
+
+            <TextView
+                android:id="@+id/tvSecurityTokenInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Security OTP: 849201"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/secondary_mint"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_outline"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Review & Process Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReviewOrder"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Review &amp; Process 📋"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_clinical_blue"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

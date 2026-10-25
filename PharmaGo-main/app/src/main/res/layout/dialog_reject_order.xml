@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="@color/card_surface"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Reject Prescription Order"
+        android:textColor="@color/danger_alert"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:text="Please select the clinical justification for rejecting this order. The patient will be notified immediately."
+        android:textColor="@color/neutral_muted"
+        android:textSize="12sp" />
+
+    <RadioGroup
+        android:id="@+id/rgRejectionReasons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp">
+
+        <RadioButton
+            android:id="@+id/rbReasonIllegible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="Prescription handwriting illegible / blurry photo"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+
+        <RadioButton
+            android:id="@+id/rbReasonOutOfStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Prescribed medicine is out of stock in hospital pharmacy"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+
+        <RadioButton
+            android:id="@+id/rbReasonDoctorReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Doctor registration number / stamp missing"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+
+        <RadioButton
+            android:id="@+id/rbReasonDosage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Invalid / potentially harmful drug dosage"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Additional Pharmacist Remarks (Optional)"
+        app:boxBackgroundColor="@color/background_surface"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRejectionCustomRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:inputType="textCapSentences"
+            android:textSize="13sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelRejection"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Cancel"
+            android:textColor="@color/neutral_muted"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/border_outline" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmRejection"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1.5"
+            android:backgroundTint="@color/danger_alert"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Confirm Rejection"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp" />
+    </LinearLayout>
+
+</LinearLayout>

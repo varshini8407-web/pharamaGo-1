@@ -1,0 +1,40 @@
+# ==========================================
+# PharmaGo Git Ignore
+# ==========================================
+
+# Built binaries & packages
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.jar
+*.war
+*.ear
+
+# Android Gradle & IDE
+.gradle/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+output.json
+
+# Maven & Spring Boot
+target/
+.mvn/wrapper/maven-wrapper.jar
+data/
+*.mv.db
+*.trace.db
+uploads/
+
+# OS & Log files
+*.log
+Thumbs.db
+[Bb]ackup/
+scratch/

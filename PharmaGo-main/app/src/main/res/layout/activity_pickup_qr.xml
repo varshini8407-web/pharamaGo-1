@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_surface">
+
+    <LinearLayout
+        android:id="@+id/pickupContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top App Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnBackPickup"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/neutral_dark"
+                    android:contentDescription="Back" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pickup Pass &amp; QR"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital &amp; Pharmacy Takeaway"
+                    android:textSize="12sp"
+                    android:textColor="@color/neutral_muted" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Status Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvPickupStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Ready for Hospital Pickup"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/secondary_mint" />
+
+                <TextView
+                    android:id="@+id/tvPickupDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pharmacy: MedPlus Wellness\nOrder: Amoxicillin 250mg • Total: ₹120.00\nCounter #2, Ground Floor"
+                    android:textSize="13sp"
+                    android:textColor="@color/neutral_muted"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="3dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- QR Code Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show QR Code to Pharmacist"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark" />
+
+                <ImageView
+                    android:id="@+id/imgPickupQR"
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="Pickup QR Code"
+                    android:scaleType="fitCenter"
+                    android:background="#FFFFFF"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:id="@+id/tvPickupQR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pickup ID: PG-102"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_clinical_blue"
+                    android:background="@drawable/badge_bg"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_marginTop="14dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Back to Home -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBackHome"
+            style="@style/Widget.PharmaGo.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to Dashboard"
+            android:textAllCaps="false" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminateTint="@color/primary_clinical_blue"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

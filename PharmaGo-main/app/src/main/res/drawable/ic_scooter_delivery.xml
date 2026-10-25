@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <!-- Rear Delivery Box (Red) -->
+  <path
+      android:fillColor="#DC2626"
+      android:pathData="M8,14h10v12h-10z"/>
+  <!-- Scooter Frame & Seat -->
+  <path
+      android:fillColor="#1E293B"
+      android:pathData="M18,22h10l4,-8h4v3h-2.5l-3,6h-8.5v3h12v3h-16z"/>
+  <!-- Handlebars -->
+  <path
+      android:fillColor="#1E293B"
+      android:pathData="M33,14h5v3h-5z"/>
+  <!-- Wheels -->
+  <path
+      android:fillColor="#0F172A"
+      android:pathData="M14,35a6,6 0 1,0 0,-12 6,6 0 0,0 0,12zM36,35a6,6 0 1,0 0,-12 6,6 0 0,0 0,12z"/>
+  <!-- Wheel Hubs -->
+  <path
+      android:fillColor="#E2E8F0"
+      android:pathData="M14,31a2,2 0 1,0 0,-4 2,2 0 0,0 0,4zM36,31a2,2 0 1,0 0,-4 2,2 0 0,0 0,4z"/>
+</vector>

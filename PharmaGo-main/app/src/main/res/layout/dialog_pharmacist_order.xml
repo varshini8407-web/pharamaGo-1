@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="@color/background_surface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="24dp">
+
+        <!-- Top Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#CBD5E1"
+            android:layout_marginBottom="14dp" />
+
+        <!-- Header: Order ID, Type Badge, and Close Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDialogOrderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order #8092 Verification"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark" />
+
+                <TextView
+                    android:id="@+id/tvDialogPatientInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patient: Rahul Sharma • +91 98765 43210"
+                    android:textSize="12.5sp"
+                    android:textColor="@color/neutral_muted"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <!-- Order Type Tag -->
+            <TextView
+                android:id="@+id/tvDialogOrderTypeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TAKEAWAY 🏥"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_clinical_blue"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/primary_container"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginEnd="10dp" />
+
+            <ImageView
+                android:id="@+id/btnCloseDialog"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_close_circle"
+                app:tint="#94A3B8"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Close" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_outline"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 1. PRESCRIPTION VIEWER SECTION -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPLOADED PRESCRIPTION"
+            android:textSize="11.5sp"
+            android:textStyle="bold"
+            android:textColor="@color/neutral_muted"
+            android:letterSpacing="0.05"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPrescriptionPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="18dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <!-- Prescription Thumbnail Container -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/primary_container">
+
+                    <ImageView
+                        android:id="@+id/ivPrescriptionThumbnail"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_prescription"
+                        app:tint="@color/primary_clinical_blue"
+                        android:contentDescription="Prescription" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Digital Prescription #RX-8092"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr. Arvind Sharma, MBBS • Apollo Clinic"
+                        android:textSize="12sp"
+                        android:textColor="@color/neutral_muted"
+                        android:layout_marginTop="2dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔍 Tap to inspect prescription fullscreen"
+                        android:textSize="11.5sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 2. MEDICINE RECONCILIATION TABLE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MEDICINE RECONCILIATION &amp; STOCK"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_muted"
+                android:letterSpacing="0.05" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adjust Qty"
+                android:textSize="11.5sp"
+                android:textColor="@color/primary_clinical_blue"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Dynamic Medicine Rows RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPrescriptionMedicines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 3. LIVE BILL CALCULATION SUMMARY CARD -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1.2dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Live Bill Summary"
+                    android:textSize="14.5sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Subtotal Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Medicines Subtotal"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted" />
+
+                    <TextView
+                        android:id="@+id/tvBillSubtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹190.00"
+                        android:textSize="13.5sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                </LinearLayout>
+
+                <!-- Platform / Pharmacist Verification Fee -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Prescription Verification Fee"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted" />
+
+                    <TextView
+                        android:id="@+id/tvBillPlatformFee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹15.00"
+                        android:textSize="13.5sp"
+                        android:textColor="@color/neutral_dark" />
+
+                </LinearLayout>
+
+                <!-- GST (5%) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Applicable GST (5%)"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted" />
+
+                    <TextView
+                        android:id="@+id/tvBillTax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹9.50"
+                        android:textSize="13.5sp"
+                        android:textColor="@color/neutral_dark" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border_outline"
+                    android:layout_marginBottom="10dp" />
+
+                <!-- Grand Total Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Grand Total (Live)"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <TextView
+                        android:id="@+id/tvBillGrandTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹214.50"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 4. ACTION BUTTONS ROW -->
+        <!-- Primary Button: Approve & Generate Invoice -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApproveOrder"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="50dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Approve &amp; Generate Invoice 📄"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary_mint"
+            app:cornerRadius="14dp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Secondary Button: Reject Order -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRejectOrder"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:minHeight="46dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Reject Prescription ✕"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/danger_alert"
+            app:strokeColor="@color/danger_alert"
+            app:strokeWidth="1dp"
+            app:cornerRadius="14dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

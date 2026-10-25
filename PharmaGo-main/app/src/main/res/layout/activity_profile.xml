@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top App Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnBackProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/neutral_dark"
+                    android:contentDescription="Back" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patient Profile"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manage healthcare records &amp; delivery addresses"
+                    android:textSize="12sp"
+                    android:textColor="@color/neutral_muted" />
+            </LinearLayout>
+
+            <!-- Verified Badge -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verified ✓"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/secondary_mint"
+                android:background="@drawable/badge_bg"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp" />
+
+        </LinearLayout>
+
+        <!-- User Header Avatar & Profile Hero Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Top Profile Info Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- Avatar with Floating Camera/Edit Badge -->
+                    <RelativeLayout
+                        android:id="@+id/layoutAvatarClick"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            app:cardCornerRadius="36dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/primary_container">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_nav_profile"
+                                app:tint="@color/primary_clinical_blue"
+                                android:contentDescription="Avatar" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Floating Edit Pencil Badge -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/btnAvatarEditBadge"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            app:cardCornerRadius="13dp"
+                            app:cardElevation="2dp"
+                            app:strokeWidth="1.5dp"
+                            app:strokeColor="@color/white"
+                            app:cardBackgroundColor="@color/primary_clinical_blue">
+
+                            <ImageView
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_edit"
+                                app:tint="@color/white"
+                                android:contentDescription="Edit" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </RelativeLayout>
+
+                    <!-- User Name & Contact Details -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp">
+
+                        <TextView
+                            android:id="@+id/tvProfileUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Admin User"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark" />
+
+                        <TextView
+                            android:id="@+id/tvProfileEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="admin@pharmago.com"
+                            android:textSize="13sp"
+                            android:textColor="@color/neutral_muted"
+                            android:layout_marginTop="2dp" />
+
+                        <TextView
+                            android:id="@+id/tvProfilePhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+91 98765 43210"
+                            android:textSize="12sp"
+                            android:textColor="@color/neutral_muted"
+                            android:layout_marginTop="2dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/badge_bg"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Patient ID: #"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success_green" />
+
+                            <TextView
+                                android:id="@+id/tvProfileId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="101"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success_green" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border_outline"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Prominent, Professional "Edit Profile Details" Action Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditProfile"
+                    style="@style/Widget.PharmaGo.Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Edit Profile &amp; Medical Info"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_edit"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="14dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Patient Health Details -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🩺 Clinical &amp; Patient Records"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <!-- Quick Section Edit Link -->
+                    <TextView
+                        android:id="@+id/btnEditRecords"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit ›"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:padding="4dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+
+                <!-- Blood Group Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_medical_cross"
+                        app:tint="@color/primary_clinical_blue"
+                        android:contentDescription="Blood" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Blood Group"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted"
+                        android:layout_marginStart="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvProfileBloodGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="O+ (Universal)"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+                </LinearLayout>
+
+                <!-- Emergency Contact Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_hospital"
+                        app:tint="@color/primary_clinical_blue"
+                        android:contentDescription="Emergency" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Emergency Contact"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted"
+                        android:layout_marginStart="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvProfileEmergency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 98765 43210"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+                </LinearLayout>
+
+                <!-- Insurance Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="@color/secondary_mint"
+                        android:contentDescription="Insurance" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Insurance Status"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted"
+                        android:layout_marginStart="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvProfileInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Verified (CareHealth Plus)"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/secondary_mint" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section: Saved Delivery Addresses -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="📍 Primary Delivery Address"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <!-- Quick Address Change Link -->
+                    <TextView
+                        android:id="@+id/btnEditAddressSection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change ›"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:padding="4dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvProfileAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🏡 Home • Apt 402, Green Avenue, Sector 4, Metro City"
+                    android:textSize="13sp"
+                    android:textColor="@color/neutral_dark"
+                    android:lineSpacingExtra="2dp"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🏢 Work • Tech Park Tower B, 3rd Floor"
+                    android:textSize="12sp"
+                    android:textColor="@color/neutral_muted" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Danger Logout Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log Out of Session"
+            android:textAllCaps="false"
+            android:textColor="@color/danger_alert"
+            app:strokeColor="@color/danger_alert"
+            app:strokeWidth="1.5dp"
+            app:cornerRadius="14dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

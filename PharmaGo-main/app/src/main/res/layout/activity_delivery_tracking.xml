@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_surface">
+
+    <LinearLayout
+        android:id="@+id/deliveryContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- LUSH GREEN HEADER BANNER (Matching User Reference Image 1) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#108A46"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- Top Header Bar: Back, Store Name, Share -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/btnBackDelivery"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="#FFFFFF"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Back" />
+
+                <TextView
+                    android:id="@+id/tvPharmacyTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Apollo Metro Pharmacy"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageView
+                    android:id="@+id/btnShareDelivery"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_share"
+                    app:tint="#FFFFFF"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Share" />
+
+            </LinearLayout>
+
+            <!-- Main Status Title: "Order is on the way 🤘" -->
+            <TextView
+                android:id="@+id/tvDeliveryStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order is on the way 🤘"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+
+            <!-- ETA Badge Pill with Refresh: "Arriving in 7 mins 🔄" -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#0D6A35"
+                android:paddingStart="14dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/tvEtaBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arriving in 7 mins"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/btnRefreshTracking"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_refresh"
+                    app:tint="#FFFFFF"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Refresh" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ALERT BAR: "You have 1 new message from delivery partner | CHAT NOW" (Matching Image 1) -->
+        <LinearLayout
+            android:id="@+id/layoutAlertMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <!-- Circular Chat Speech Icon Matching Image 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#CBD5E1"
+                app:cardBackgroundColor="#F8FAFC">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chat"
+                    app:tint="#475569"
+                    android:contentDescription="Message" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Message Headline matching Image 1: "You have 1 new message from the\ndelivery partner" -->
+            <TextView
+                android:id="@+id/tvAlertMessageText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="You have 1 new message from the\ndelivery partner"
+                android:textSize="12.5sp"
+                android:textColor="#1E293B"
+                android:lineSpacingExtra="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- "CHAT NOW" Action Button Matching Image 1 -->
+            <TextView
+                android:id="@+id/btnChatNowAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHAT NOW"
+                android:textSize="12.5sp"
+                android:textStyle="bold"
+                android:textColor="#E11D48"
+                android:letterSpacing="0.03"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp" />
+
+            <!-- Circular Dismiss Button Matching Image 1 -->
+            <ImageView
+                android:id="@+id/btnDismissAlert"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_close_circle"
+                app:tint="#94A3B8"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Dismiss" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E8F0" />
+
+        <!-- INTERACTIVE GPS MAP VIEW (Matching Image 1) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp">
+
+            <com.example.pharmago.views.DeliveryMapView
+                android:id="@+id/deliveryMapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- Floating Pill on Map: Verified Prescription / Order -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#2563EB"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_check_circle"
+                    app:tint="#FFFFFF"
+                    android:contentDescription="Verified" />
+
+                <TextView
+                    android:id="@+id/tvMapOrderBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Verified Rx • Order #103"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="6dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- BOTTOM SHEET CONTENT CONTAINER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Banner 1: Express Healthcare Delivery -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#CBD5E1"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardCornerRadius="22dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/primary_container">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_medical_cross"
+                            app:tint="@color/primary_clinical_blue"
+                            android:contentDescription="Medical" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Express Healthcare Delivery 🩺"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sealed &amp; temperature controlled by Apollo Pharmacist"
+                            android:textSize="11sp"
+                            android:textColor="@color/neutral_muted"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 2: Delivery Partner Card (Matching User Reference Image 1) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#CBD5E1"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <!-- Courier Avatar with Helmet Badge -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        app:cardCornerRadius="26dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FEE2E2">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_nav_profile"
+                            app:tint="#DC2626"
+                            android:contentDescription="Driver Avatar" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="14dp">
+
+                        <TextView
+                            android:id="@+id/tvDriverName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chandan Kumar Rajbhar"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100+ five-star deliveries • Vaccinated ✓"
+                            android:textSize="12sp"
+                            android:textColor="@color/neutral_muted"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                    <!-- Chat Action Button with Red Notification Dot -->
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/btnChatDriver"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            app:cardCornerRadius="21dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="#E2E8F0"
+                            app:cardBackgroundColor="@color/card_surface">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_chat"
+                                app:tint="#DC2626"
+                                android:contentDescription="Chat" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Red Unread Message Dot -->
+                        <View
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="#DC2626" />
+
+                    </RelativeLayout>
+
+                    <!-- Call Action Button -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btnCallDriver"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        app:cardCornerRadius="21dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#E2E8F0"
+                        app:cardBackgroundColor="@color/card_surface">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_phone"
+                            app:tint="#DC2626"
+                            android:contentDescription="Call" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 3: Order Details & Address Summary -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#CBD5E1"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Summary &amp; Destination"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Medicine: Amoxicillin 500mg, Paracetamol 650mg\nPharmacy: Apollo Metro Pharmacy\nDestination: Apt 402, Green Avenue, Sector 4, Metro City\nTotal Amount: ₹90.00"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted"
+                        android:lineSpacingExtra="3dp"
+                        android:layout_marginTop="8dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Milestones Stepper -->
+                    <TextView
+                        android:id="@+id/tvOrderConfirmed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓ Order Confirmed at Pharmacy"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/secondary_mint"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvPreparing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓ Medicines Sealed &amp; Handed to Courier"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/secondary_mint"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvOutForDelivery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="● Out for Delivery with Chandan (7 mins away)"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvDelivered"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="○ Delivered to Customer"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Test Simulation Button: Mark as Delivered -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSimulateDelivered"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simulate Delivery Complete (Mark Delivered)"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                app:cornerRadius="12dp"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Back to Dashboard CTA Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeliveryHome"
+                style="@style/Widget.PharmaGo.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to Home Dashboard"
+                android:textAllCaps="false"
+                app:cornerRadius="12dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/primary_clinical_blue"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

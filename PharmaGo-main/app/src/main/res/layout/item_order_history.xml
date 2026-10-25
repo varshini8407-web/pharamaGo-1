@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeWidth="1.2dp"
+    app:strokeColor="@color/border_outline"
+    app:cardBackgroundColor="@color/card_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Order Header & Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvOrderId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order #103"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark" />
+
+            <TextView
+                android:id="@+id/tvOrderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● OUT FOR DELIVERY (7 mins)"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_clinical_blue"
+                android:background="@drawable/badge_bg"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
+
+        </LinearLayout>
+
+        <!-- Pharmacy & Hospital Name -->
+        <TextView
+            android:id="@+id/tvOrderPharmacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏥 Apollo Metro Pharmacy"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_clinical_blue" />
+
+        <!-- Order Items & Price Details -->
+        <TextView
+            android:id="@+id/tvOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amoxicillin 500mg, Paracetamol 650mg • Total: ₹90.00"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvOrderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Placed on: Today, 12:45 PM • Doorstep Delivery"
+            android:textSize="11sp"
+            android:textColor="@color/neutral_muted"
+            android:layout_marginTop="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_outline"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Action Buttons Row: Professional, Readable, Clear Sizing -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Primary Action Button: "Track Live Delivery 🛵" or "Show Pickup QR 📱" -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrderPrimaryAction"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:minHeight="48dp"
+                android:layout_weight="1.35"
+                android:text="Track Live Delivery 🛵"
+                android:textAllCaps="false"
+                android:textSize="13.5sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#108A46"
+                app:cornerRadius="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Secondary Action Button: "Receipt" or "Reorder" -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrderSecondaryAction"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:minHeight="48dp"
+                android:layout_weight="0.85"
+                android:text="Receipt 📄"
+                android:textAllCaps="false"
+                android:textSize="13.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark"
+                app:strokeColor="@color/border_outline"
+                app:strokeWidth="1.2dp"
+                app:cornerRadius="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

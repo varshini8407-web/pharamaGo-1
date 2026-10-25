@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">PharmaGo</string>
+    <string name="order_success_msg">Order placed successfully!</string>
+    <string name="order_details_format">Medicine: %1$s\nPharmacy: %2$s\nOrder Type: %3$s\nTotal: %4$s\nPayment Method: %5$s</string>
+    <string name="order_save_error">Order confirmed, but saving order history failed.</string>
+    <string name="server_status_checking">Checking server status…</string>
+    <string name="server_status_format">Server Status: %1$s</string>
+    <string name="server_status_error">Server Status: Error %1$d</string>
+    <string name="server_status_disconnected">Server Status: Disconnected</string>
+    <string name="server_status_connected">Server Status: Connected</string>
+
+    <string name="processing_order">Processing your order…</string>
+    <string name="order_failed_server">Order failed on server: %1$d</string>
+    <string name="order_connection_error">Connection error. Order not placed on server.</string>
+    <string name="pickup_id_format">Pickup ID: %1$s</string>
+    <string name="fetching_qr">Fetching QR code…</string>
+    <string name="qr_fetch_failed">Failed to fetch QR. Using local ID.</string>
+
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="register_link">New user? Register here</string>
+    <string name="login_success">Login successful</string>
+    <string name="unauthorized">Unauthorized</string>
+    <string name="user_not_found">User not found</string>
+
+    <string name="full_name_hint">Full Name</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="register_btn">REGISTER</string>
+    <string name="registration_success">Registration successful</string>
+    <string name="registration_failed">Registration failed</string>
+
+    <string name="view_medicines">View Medicines</string>
+    <string name="hello_user">Hello, %1$s 👋</string>
+
+    <string name="upload_success">Upload successful</string>
+    <string name="upload_failed">Upload failed: %1$d</string>
+    <string name="network_error">Network error: %1$s</string>
+    <string name="fill_fields_error">Please fill all fields</string>
+    <string name="passwords_mismatch">Passwords do not match</string>
+
+    <string name="medicine_not_found">No medicines found.</string>
+    <string name="medicine_category_format">Category: %1$s</string>
+    <string name="prescription_required">⚠️ Prescription Required</string>
+    <string name="over_the_counter">✅ Over the Counter</string>
+    <string name="select_medicine">Select Medicine</string>
+
+    <string name="pharmacy_not_found">No pharmacies available at the moment.</string>
+    <string name="session_expired">Session expired. Please login again.</string>
+    <string name="failed_load_pharmacies">Failed to load pharmacies</string>
+    <string name="google_maps_key" translatable="false">AIzaSyDemoKeyPharmaGoHealthcareMaps2026</string>
+</resources>

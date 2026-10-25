@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="@color/card_surface"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:strokeColor="@color/border_outline"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header: Order ID, Timestamp & Status Pill Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDeliveryOrderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Order #8093"
+                    android:textColor="@color/neutral_dark"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tvDeliveryTimestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Today, 04:45 PM"
+                    android:textColor="@color/neutral_muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDeliveryStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/primary_container"
+                android:fontFamily="sans-serif-bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="READY FOR DELIVERY"
+                android:textColor="@color/primary_clinical_blue"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/border_outline" />
+
+        <!-- Customer Identity & Quick Call Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/background_surface"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_nav_profile"
+                    app:tint="@color/primary_clinical_blue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDeliveryCustomerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Priya Patel"
+                    android:textColor="@color/neutral_dark"
+                    android:textSize="14.5sp" />
+
+                <TextView
+                    android:id="@+id/tvDeliveryCustomerPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="+91 98112 34567"
+                    android:textColor="@color/neutral_muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Quick Direct Call Button -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickCallCustomer"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/secondary_container"
+                app:cardCornerRadius="19dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_phone"
+                    app:tint="@color/secondary_mint" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Address Route Timeline -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <!-- Pickup Point (Hospital Pharmacy) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_hospital"
+                    app:tint="@color/primary_clinical_blue" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="PICKUP PHARMACY"
+                        android:textColor="@color/neutral_muted"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryPharmacyAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Apollo Central Hospital, Block B Pharmacy"
+                        android:textColor="@color/neutral_dark"
+                        android:textSize="12.5sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Route Connector Line -->
+            <View
+                android:layout_width="2dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginVertical="3dp"
+                android:background="@color/border_outline" />
+
+            <!-- Destination Drop (Patient Doorstep) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/danger_alert" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="CUSTOMER DOORSTEP DROP"
+                        android:textColor="@color/neutral_muted"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryPatientAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Flat 402, Lotus Orchid, Sector 4, Metro City"
+                        android:textColor="@color/neutral_dark"
+                        android:textSize="12.5sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Prescribed Medicine Items Summary -->
+        <TextView
+            android:id="@+id/tvDeliveryMedSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="@color/background_surface"
+            android:fontFamily="sans-serif"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="📦 Azithromycin 500mg (1x), Pantoprazole 40mg (1x), Paracetamol 650mg (1x)"
+            android:textColor="@color/neutral_muted"
+            android:textSize="11.5sp" />
+
+        <!-- Payment Mode & Bill Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDeliveryPaymentBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/secondary_container"
+                android:fontFamily="sans-serif-bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="✓ PAID ONLINE (UPI)"
+                android:textColor="@color/on_secondary_container"
+                android:textSize="11.5sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvDeliveryTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="₹235.00"
+                android:textColor="@color/primary_clinical_blue"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Contextual Action Buttons Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <!-- Button for New Assignments: Accept Order -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAcceptDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:backgroundTint="@color/primary_clinical_blue"
+                android:fontFamily="sans-serif-bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Accept &amp; Start Delivery 🛵"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:cornerRadius="12dp"
+                android:visibility="gone" />
+
+            <!-- Container for In Transit: Open Map Navigation + Verify & Complete -->
+            <LinearLayout
+                android:id="@+id/layoutInTransitActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOpenMapNav"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Live Route 🗺️"
+                    android:textColor="@color/primary_clinical_blue"
+                    android:textSize="12.5sp"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="@color/primary_clinical_blue" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerifyOtpComplete"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1.3"
+                    android:backgroundTint="@color/secondary_mint"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Verify OTP 🔐"
+                    android:textColor="@color/white"
+                    android:textSize="12.5sp"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+
+            <!-- Container for Completed: View Receipt -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewDeliveredReceipt"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:fontFamily="sans-serif-bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Delivered &amp; Verified ✓"
+                android:textColor="@color/secondary_mint"
+                android:textSize="13sp"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/secondary_mint"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
