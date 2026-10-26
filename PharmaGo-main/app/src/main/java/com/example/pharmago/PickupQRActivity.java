@@ -75,8 +75,12 @@ public class PickupQRActivity extends AppCompatActivity {
 
         long currentOrderId = (orderId != null && orderId != -1L) ? orderId : 102L;
         long invoiceId = intent.getLongExtra("invoiceId", currentOrderId + 1000L);
-        String qrToken = com.example.pharmago.utils.QRCodeGenerator.formatTakeawayPayload(currentOrderId, invoiceId);
-        tvPickupQR.setText(String.format("Pass: ORDER #%d • INV #%d", currentOrderId, invoiceId));
+        String passedPayload = intent.getStringExtra("pickup_qr_payload");
+        if (passedPayload == null) passedPayload = intent.getStringExtra("pickupQrPayload");
+        String qrToken = (passedPayload != null && !passedPayload.trim().isEmpty())
+                ? passedPayload.trim()
+                : com.example.pharmago.utils.QRCodeGenerator.formatTakeawayPayload(currentOrderId, invoiceId);
+        tvPickupQR.setText(String.format("Pass: ORDER #%d • Token: %s", currentOrderId, qrToken));
         generateQRCodeLocally(qrToken);
 
         if (orderId != -1L) {

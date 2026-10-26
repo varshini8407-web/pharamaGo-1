@@ -49,6 +49,17 @@ public class QRScanCounterActivity extends AppCompatActivity {
     private ObjectAnimator laserAnimator;
     private boolean isFlashlightOn = false;
 
+    private final ActivityResultLauncher<String> cameraPermissionLauncher = registerForActivityResult(
+            new androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+            isGranted -> {
+                if (isGranted) {
+                    launchCameraScanner();
+                } else {
+                    Toast.makeText(this, "Camera permission is required to scan patient QR codes", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
+
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
             new ScanContract(),
             result -> {
@@ -61,6 +72,11 @@ public class QRScanCounterActivity extends AppCompatActivity {
     );
 
     private void launchCameraScanner() {
+        if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA);
+            return;
+        }
         try {
             barcodeLauncher.launch(QRCodeScanner.createCounterScanOptions());
         } catch (Exception e) {
@@ -321,7 +337,7 @@ public class QRScanCounterActivity extends AppCompatActivity {
             tvPaymentTitle.setTextColor(0xFF005C48);
             tvPaymentSub.setText("Digital payment verified. Safe to dispense.");
             tvPaymentSub.setTextColor(0xFF005C48);
-            btnConfirm.setText("Confirm & Dispense");
+            btnConfirm.setText("Dispense & Mark Completed");
         }
 
         // Add medicines dynamically

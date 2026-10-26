@@ -10,6 +10,17 @@ public class Medicine {
     private boolean requiresPrescription;
     private String createdAt;
 
+    public Medicine() {}
+
+    public Medicine(Long id, String name, String price, String category, String description, boolean requiresPrescription) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.requiresPrescription = requiresPrescription;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

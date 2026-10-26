@@ -142,6 +142,26 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".PharmacyDetailsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".OrderDetailActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".DeliveryEarningsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".PharmacistProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

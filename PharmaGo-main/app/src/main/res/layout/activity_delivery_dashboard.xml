@@ -75,6 +75,17 @@
                     app:tint="@color/white" />
 
                 <ImageView
+                    android:id="@+id/btnDeliveryEarningsNav"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Earnings &amp; Analytics"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_analytics"
+                    app:tint="@color/white" />
+
+                <ImageView
                     android:id="@+id/btnDeliveryProfileNav"
                     android:layout_width="38dp"
                     android:layout_height="38dp"

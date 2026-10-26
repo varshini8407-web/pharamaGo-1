@@ -101,6 +101,14 @@ public class AuthController {
                         .body("Error: Email is already in use!");
             }
 
+            // Pharmacist username rule enforcement
+            if (signUpRequest.getRole() == User.Role.PHARMACIST &&
+                    (signUpRequest.getUsername() == null || !signUpRequest.getUsername().toUpperCase().startsWith("ITA"))) {
+                logger.warn("Registration rejected: Pharmacist username must start with ITA");
+                return ResponseEntity.badRequest()
+                        .body("Error: Pharmacist username must begin with 'ITA' prefix (e.g. ITA1024)!");
+            }
+
             logger.info("Creating new user");
 
             User user = User.builder()

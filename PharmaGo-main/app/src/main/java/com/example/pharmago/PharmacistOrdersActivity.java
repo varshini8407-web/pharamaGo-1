@@ -223,7 +223,31 @@ public class PharmacistOrdersActivity extends AppCompatActivity {
         View.OnClickListener inspectRxListener = v -> {
             View imageModal = LayoutInflater.from(this).inflate(R.layout.dialog_prescription_image_viewer, null);
             TextView tvModalTitle = imageModal.findViewById(R.id.tvModalRxTitle);
+            ImageView ivFullImage = imageModal.findViewById(R.id.ivFullPrescriptionImage);
             if (tvModalTitle != null) tvModalTitle.setText("Rx #" + order.getOrderId() + " - " + order.getPatientName());
+
+            String imagePath = order.getPrescriptionImagePath();
+            if (imagePath != null && !imagePath.isEmpty() && ivFullImage != null) {
+                try {
+                    android.net.Uri uri = android.net.Uri.parse(imagePath);
+                    if ("content".equals(uri.getScheme())) {
+                        Bitmap bmp = android.graphics.BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                        if (bmp != null) {
+                            ivFullImage.setImageBitmap(bmp);
+                            ivFullImage.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        String filePath = uri.getPath() != null ? uri.getPath() : imagePath;
+                        if (new java.io.File(filePath).exists()) {
+                            Bitmap bmp = android.graphics.BitmapFactory.decodeFile(filePath);
+                            if (bmp != null) {
+                                ivFullImage.setImageBitmap(bmp);
+                                ivFullImage.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                } catch (Exception ignored) {}
+            }
 
             new MaterialAlertDialogBuilder(this)
                     .setView(imageModal)
@@ -344,7 +368,7 @@ public class PharmacistOrdersActivity extends AppCompatActivity {
                         loadOrders();
 
                         if (isTakeaway) {
-                            showTakeawayApprovalSuccessDialog(order, result.getInvoiceId(), result.getQrString(), qrBitmap);
+                            showTakeawayApprovalSuccessDialog(order, result.getInvoiceId(), result.getQrString());
                         } else {
                             showDeliveryApprovalSuccessDialog(order, result.getInvoiceId(), result.getOtpCode());
                         }
@@ -373,7 +397,7 @@ public class PharmacistOrdersActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(v -> {
             int selectedRadioId = rg.getCheckedRadioButtonId();
             RadioButton selectedRb = view.findViewById(selectedRadioId);
-            String reason = selectedRb != null ? selectedRb.getText().toString() : "Prescription verification declined";
+            String reason = selectedRb != null ? selectedRb.getText().toString() : "Prescription unclear / unreadable";
 
             String customRemarks = etRemarks.getText() != null ? etRemarks.getText().toString().trim() : "";
             if (!customRemarks.isEmpty()) {
@@ -402,21 +426,15 @@ public class PharmacistOrdersActivity extends AppCompatActivity {
         rejectDialog.show();
     }
 
-    private void showTakeawayApprovalSuccessDialog(OrderModel order, long invoiceId, String qrString, Bitmap qrBitmap) {
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.activity_pickup_qr, null);
-
-        TextView tvPickupStatus = dialogView.findViewById(R.id.tvPickupStatus);
-        TextView tvPickupDetails = dialogView.findViewById(R.id.tvPickupDetails);
-        ImageView ivQrCode = dialogView.findViewById(R.id.imgPickupQR);
-
-        if (tvPickupStatus != null) tvPickupStatus.setText("Takeaway Ready • Invoice #" + invoiceId);
-        if (tvPickupDetails != null) tvPickupDetails.setText("Patient: " + order.getPatientName() + " • Token: " + qrString);
-        if (ivQrCode != null && qrBitmap != null) ivQrCode.setImageBitmap(qrBitmap);
-
+    // Requirement Part 2.1: Pharmacist does NOT render QR on their device; writes payload to MySQL so CLIENT app renders it
+    private void showTakeawayApprovalSuccessDialog(OrderModel order, long invoiceId, String qrString) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Order Approved (Takeaway)")
-                .setMessage("Inventory deducted. Scannable pickup QR code generated for patient counter verification.")
-                .setView(dialogView)
+                .setTitle("Order Approved (Ready for Pickup)")
+                .setMessage("Invoice #" + invoiceId + " generated successfully.\n\n" +
+                        "• Inventory stock deducted\n" +
+                        "• Order status updated to READY_FOR_PICKUP\n" +
+                        "• Pickup QR payload stored in database for the Patient to present on their device screen\n\n" +
+                        "When the patient arrives at the counter, use 'Counter QR Scanner' to scan their screen.")
                 .setPositiveButton("Done", (d, w) -> d.dismiss())
                 .show();
     }

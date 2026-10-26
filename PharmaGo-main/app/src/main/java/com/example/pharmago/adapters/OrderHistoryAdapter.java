@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -14,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pharmago.R;
 import com.example.pharmago.models.OrderResponse;
+import com.example.pharmago.utils.InvoiceReceiptBottomSheet;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +25,28 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         void onOrderClick(OrderResponse order);
     }
 
+    public interface OnOrderActionListener {
+        void onOrderClick(OrderResponse order);
+        void onViewPickupQR(OrderResponse order);
+        void onViewInvoiceReceipt(OrderResponse order);
+        void onTrackDelivery(OrderResponse order);
+    }
+
     private List<OrderResponse> fullList;
     private List<OrderResponse> itemList;
     private OnOrderClickListener listener;
+    private OnOrderActionListener actionListener;
 
     public OrderHistoryAdapter(List<OrderResponse> items, OnOrderClickListener listener) {
         this.fullList = items != null ? new ArrayList<>(items) : new ArrayList<>();
         this.itemList = items != null ? new ArrayList<>(items) : new ArrayList<>();
         this.listener = listener;
+    }
+
+    public OrderHistoryAdapter(List<OrderResponse> items, OnOrderActionListener actionListener) {
+        this.fullList = items != null ? new ArrayList<>(items) : new ArrayList<>();
+        this.itemList = items != null ? new ArrayList<>(items) : new ArrayList<>();
+        this.actionListener = actionListener;
     }
 
     @NonNull
@@ -62,16 +77,17 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         }
 
         String status = order.getStatus() != null ? order.getStatus().toUpperCase() : "PROCESSING";
+        String type = order.getType() != null ? order.getType().toUpperCase() : "DELIVERY";
 
         if (holder.tvOrderStatus != null) {
             if ("DELIVERED".equals(status)) {
                 holder.tvOrderStatus.setText("✓ DELIVERED");
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.success_green));
-            } else if ("READY FOR PICKUP".equals(status)) {
+            } else if (status.contains("PICKUP") || status.contains("READY")) {
                 holder.tvOrderStatus.setText("🏥 READY FOR PICKUP");
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.secondary_mint));
-            } else if ("IN TRANSIT".equals(status)) {
-                holder.tvOrderStatus.setText("● OUT FOR DELIVERY (7 mins)");
+            } else if ("IN TRANSIT".equals(status) || status.contains("OUT_FOR_DELIVERY")) {
+                holder.tvOrderStatus.setText("● OUT FOR DELIVERY");
                 holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, R.color.primary_clinical_blue));
             } else {
                 holder.tvOrderStatus.setText("● " + status);
@@ -83,49 +99,74 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             holder.tvOrderDate.setText("Placed on: " + (order.getOrderDate() != null ? order.getOrderDate() : "Recent") + " • Verified Rx");
         }
 
-        // Functional Primary & Secondary Action Buttons
-        if (holder.btnOrderPrimaryAction != null) {
-            if ("DELIVERY".equalsIgnoreCase(order.getType())) {
-                if ("DELIVERED".equals(status)) {
-                    holder.btnOrderPrimaryAction.setText("Delivery Summary ✓");
-                    holder.btnOrderPrimaryAction.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.primary_container));
-                    holder.btnOrderPrimaryAction.setTextColor(ContextCompat.getColor(context, R.color.primary_clinical_blue));
-                } else {
-                    holder.btnOrderPrimaryAction.setText("Track Live Delivery 🛵");
-                    holder.btnOrderPrimaryAction.setBackgroundTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#108A46")));
-                    holder.btnOrderPrimaryAction.setTextColor(ContextCompat.getColor(context, R.color.white));
-                }
-            } else {
-                holder.btnOrderPrimaryAction.setText("Show Pickup QR Code 📱");
-                holder.btnOrderPrimaryAction.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.primary_clinical_blue));
-                holder.btnOrderPrimaryAction.setTextColor(ContextCompat.getColor(context, R.color.white));
+        // Requirement Part 1.4: Delivery OTP Card prominent for Delivery orders
+        boolean isDelivery = "DELIVERY".equalsIgnoreCase(type);
+        if (holder.cardDeliveryOtp != null) {
+            holder.cardDeliveryOtp.setVisibility(isDelivery ? View.VISIBLE : View.GONE);
+            if (isDelivery && holder.tvDeliveryOtpCode != null) {
+                long orderNum = order.getId() != null ? order.getId() : 103L;
+                int digit1 = (int) ((orderNum * 7 + 1) % 9) + 1;
+                int digit2 = (int) ((orderNum * 3 + 2) % 9) + 1;
+                int digit3 = (int) ((orderNum * 5 + 4) % 9) + 1;
+                int digit4 = (int) ((orderNum * 2 + 5) % 9) + 1;
+                int digit5 = (int) ((orderNum * 8 + 3) % 9) + 1;
+                int digit6 = (int) ((orderNum * 4 + 7) % 9) + 1;
+                holder.tvDeliveryOtpCode.setText(String.format("[ %d %d %d %d %d %d ]", digit1, digit2, digit3, digit4, digit5, digit6));
             }
+        }
 
-            holder.btnOrderPrimaryAction.setOnClickListener(v -> {
-                if (listener != null) {
+        // Requirement Part 1.4: Split Actions:
+        // 1. "View Pickup QR" (Visible ONLY if order_type == 'TAKEAWAY' and status is READY_FOR_PICKUP)
+        boolean isTakeawayReady = "TAKEAWAY".equalsIgnoreCase(type) && (status.contains("READY") || status.contains("PICKUP"));
+        if (holder.btnViewPickupQR != null) {
+            holder.btnViewPickupQR.setVisibility(isTakeawayReady ? View.VISIBLE : View.GONE);
+            holder.btnViewPickupQR.setOnClickListener(v -> {
+                if (actionListener != null) {
+                    actionListener.onViewPickupQR(order);
+                } else if (listener != null) {
                     listener.onOrderClick(order);
                 }
             });
         }
 
-        if (holder.btnOrderSecondaryAction != null) {
-            if ("DELIVERED".equals(status)) {
-                holder.btnOrderSecondaryAction.setText("Reorder 🔄");
-                holder.btnOrderSecondaryAction.setOnClickListener(v ->
-                        Toast.makeText(context, "Added " + order.getPharmacyName() + " medicines back to cart! ✓", Toast.LENGTH_SHORT).show()
-                );
-            } else {
-                holder.btnOrderSecondaryAction.setText("Receipt 📄");
-                holder.btnOrderSecondaryAction.setOnClickListener(v -> {
-                    if (listener != null) {
-                        listener.onOrderClick(order);
+        // Track Delivery Button: visible for ALL delivery orders so user can always access tracking
+        if (holder.btnTrackDelivery != null) {
+            holder.btnTrackDelivery.setVisibility(isDelivery ? View.VISIBLE : View.GONE);
+            holder.btnTrackDelivery.setText(status.contains("DELIVERED") ? "View Delivery Summary" : "Track Delivery 🛵");
+            holder.btnTrackDelivery.setOnClickListener(v -> {
+                if (actionListener != null) {
+                    actionListener.onTrackDelivery(order);
+                } else if (listener != null) {
+                    listener.onOrderClick(order);
+                }
+            });
+        }
+
+        // 2. "View Invoice Receipt" (For all completed/approved orders)
+        if (holder.btnViewInvoiceReceipt != null) {
+            holder.btnViewInvoiceReceipt.setVisibility(View.VISIBLE);
+            holder.btnViewInvoiceReceipt.setOnClickListener(v -> {
+                if (actionListener != null) {
+                    actionListener.onViewInvoiceReceipt(order);
+                } else {
+                    if (context instanceof androidx.fragment.app.FragmentActivity) {
+                        androidx.fragment.app.FragmentActivity act = (androidx.fragment.app.FragmentActivity) context;
+                        double price = order.getTotalPrice() != null ? order.getTotalPrice() : 120.00;
+                        InvoiceReceiptBottomSheet.show(act.getSupportFragmentManager(),
+                                order.getId() != null ? order.getId() : 101L,
+                                order.getPharmacyName() != null ? order.getPharmacyName() : "Apollo Central Pharmacy",
+                                order.getType() != null ? order.getType() : "TAKEAWAY",
+                                price,
+                                "UPI (Instant Transfer)");
                     }
-                });
-            }
+                }
+            });
         }
 
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
+            if (actionListener != null) {
+                actionListener.onOrderClick(order);
+            } else if (listener != null) {
                 listener.onOrderClick(order);
             }
         });
@@ -173,8 +214,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvOrderId, tvOrderPharmacy, tvOrderDetails, tvOrderStatus, tvOrderDate;
-        Button btnOrderPrimaryAction, btnOrderSecondaryAction;
+        TextView tvOrderId, tvOrderPharmacy, tvOrderDetails, tvOrderStatus, tvOrderDate, tvDeliveryOtpCode;
+        MaterialCardView cardDeliveryOtp;
+        Button btnViewPickupQR, btnTrackDelivery, btnViewInvoiceReceipt;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -183,8 +225,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             tvOrderDetails = itemView.findViewById(R.id.tvOrderDetails);
             tvOrderStatus = itemView.findViewById(R.id.tvOrderStatus);
             tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
-            btnOrderPrimaryAction = itemView.findViewById(R.id.btnOrderPrimaryAction);
-            btnOrderSecondaryAction = itemView.findViewById(R.id.btnOrderSecondaryAction);
+            tvDeliveryOtpCode = itemView.findViewById(R.id.tvDeliveryOtpCode);
+            cardDeliveryOtp = itemView.findViewById(R.id.cardDeliveryOtp);
+            btnViewPickupQR = itemView.findViewById(R.id.btnViewPickupQR);
+            btnTrackDelivery = itemView.findViewById(R.id.btnTrackDelivery);
+            btnViewInvoiceReceipt = itemView.findViewById(R.id.btnViewInvoiceReceipt);
         }
     }
 }

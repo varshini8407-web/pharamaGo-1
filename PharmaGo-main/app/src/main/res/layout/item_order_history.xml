@@ -79,60 +79,127 @@
             android:textColor="@color/neutral_muted"
             android:layout_marginTop="2dp" />
 
+        <!-- Delivery OTP Card: Highlighted MD3 card for Delivery orders -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDeliveryOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/primary_container"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_verified"
+                    app:tint="@color/primary_clinical_blue"
+                    android:contentDescription="OTP Icon" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share this OTP with your delivery agent:"
+                        android:textSize="11.5sp"
+                        android:textColor="@color/neutral_muted" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryOtpCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[ 4 8 2 9 1 5 ]"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08"
+                        android:textColor="@color/primary_clinical_blue"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/border_outline"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="12dp" />
 
-        <!-- Action Buttons Row: Professional, Readable, Clear Sizing -->
+        <!-- Requirement Part 1.4: Distinct Split Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Primary Action Button: "Track Live Delivery 🛵" or "Show Pickup QR 📱" -->
+            <!-- 1. "View Pickup QR" (Visible ONLY if order_type == 'TAKEAWAY' and status is READY_FOR_PICKUP) -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnOrderPrimaryAction"
+                android:id="@+id/btnViewPickupQR"
+                style="@style/Widget.PharmaGo.Button.Primary"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:minHeight="48dp"
-                android:layout_weight="1.35"
-                android:text="Track Live Delivery 🛵"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                android:layout_weight="1"
+                android:text="View Pickup QR 📱"
                 android:textAllCaps="false"
-                android:textSize="13.5sp"
+                android:textSize="13sp"
+                app:cornerRadius="12dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone" />
+
+            <!-- Track Delivery Button (if Delivery and in transit) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTrackDelivery"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                android:layout_weight="1"
+                android:text="Track Delivery 🛵"
+                android:textAllCaps="false"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#108A46"
                 app:cornerRadius="12dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:visibility="gone" />
 
-            <!-- Secondary Action Button: "Receipt" or "Reorder" -->
+            <!-- 2. "View Invoice Receipt" (For all completed/approved orders) -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnOrderSecondaryAction"
+                android:id="@+id/btnViewInvoiceReceipt"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:minHeight="48dp"
-                android:layout_weight="0.85"
-                android:text="Receipt 📄"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                android:layout_weight="1"
+                android:text="View Invoice Receipt 📄"
                 android:textAllCaps="false"
-                android:textSize="13.5sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="@color/neutral_dark"
                 app:strokeColor="@color/border_outline"
                 app:strokeWidth="1.2dp"
-                app:cornerRadius="12dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+                app:cornerRadius="12dp" />
 
         </LinearLayout>
 

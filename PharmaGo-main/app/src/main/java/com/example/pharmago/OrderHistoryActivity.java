@@ -65,37 +65,61 @@ public class OrderHistoryActivity extends AppCompatActivity {
             recyclerView.setNestedScrollingEnabled(false);
         }
 
-        // Requirement 3: Inject 3-5 items of hardcoded mock data so the list renders cards immediately upon launch
+        // Requirement 3 & 4: Inject mock data and handle distinct actions (QR, Receipt, Details)
         List<OrderResponse> mockOrders = createMockOrders();
-        orderAdapter = new OrderHistoryAdapter(mockOrders, order -> {
-            if (order == null) return;
-            if ("DELIVERY".equalsIgnoreCase(order.getType())) {
-                if (!"DELIVERED".equalsIgnoreCase(order.getStatus())) {
-                    SharedPreferences prefs = getSharedPreferences("PharmaGoOrders", MODE_PRIVATE);
-                    prefs.edit()
-                            .putBoolean("hasActiveLiveOrder", true)
-                            .putLong("activeOrderId", order.getId() != null ? order.getId() : 103L)
-                            .putString("activePharmacyName", order.getPharmacyName())
-                            .putString("activePrice", order.getTotalPrice() != null ? "₹" + String.format("%.2f", order.getTotalPrice()) : "₹90.00")
-                            .putString("activeStatus", order.getStatus() != null ? order.getStatus() : "IN TRANSIT")
-                            .putString("activeDeliveryAddress", order.getDeliveryAddress() != null ? order.getDeliveryAddress() : "Apt 402, Green Avenue, Sector 4, Metro City")
-                            .putLong("activeOrderPlacedTime", System.currentTimeMillis())
-                            .apply();
-                }
+        orderAdapter = new OrderHistoryAdapter(mockOrders, new OrderHistoryAdapter.OnOrderActionListener() {
+            @Override
+            public void onOrderClick(OrderResponse order) {
+                if (order == null) return;
+                Intent intent = new Intent(OrderHistoryActivity.this, OrderDetailActivity.class);
+                intent.putExtra("orderId", order.getId());
+                intent.putExtra("pharmacyName", order.getPharmacyName());
+                intent.putExtra("price", order.getTotalPrice() != null ? "₹" + String.format("%.2f", order.getTotalPrice()) : "₹90.00");
+                intent.putExtra("totalAmount", order.getTotalPrice() != null ? order.getTotalPrice() : 90.00);
+                intent.putExtra("status", order.getStatus());
+                intent.putExtra("orderType", order.getType());
+                intent.putExtra("deliveryAddress", order.getDeliveryAddress());
+                startActivity(intent);
+            }
 
+            @Override
+            public void onViewPickupQR(OrderResponse order) {
+                if (order == null) return;
+                Intent intent = new Intent(OrderHistoryActivity.this, PickupQRActivity.class);
+                intent.putExtra("orderId", order.getId());
+                intent.putExtra("pharmacyName", order.getPharmacyName());
+                intent.putExtra("price", order.getTotalPrice() != null ? "₹" + String.format("%.2f", order.getTotalPrice()) : "₹120.00");
+                intent.putExtra("status", order.getStatus());
+                if (order.getPickupQrPayload() != null && !order.getPickupQrPayload().isEmpty()) {
+                    intent.putExtra("pickup_qr_payload", order.getPickupQrPayload());
+                }
+                startActivity(intent);
+            }
+
+            @Override
+            public void onViewInvoiceReceipt(OrderResponse order) {
+                if (order == null) return;
+                double price = order.getTotalPrice() != null ? order.getTotalPrice() : 120.00;
+                com.example.pharmago.utils.InvoiceReceiptBottomSheet.show(getSupportFragmentManager(),
+                        order.getId() != null ? order.getId() : 101L,
+                        order.getPharmacyName() != null ? order.getPharmacyName() : "Apollo Central Pharmacy",
+                        order.getType() != null ? order.getType() : "TAKEAWAY",
+                        price,
+                        "UPI (Instant Transfer)");
+            }
+
+            @Override
+            public void onTrackDelivery(OrderResponse order) {
+                if (order == null) return;
                 Intent intent = new Intent(OrderHistoryActivity.this, DeliveryTrackingActivity.class);
                 intent.putExtra("orderId", order.getId());
                 intent.putExtra("pharmacyName", order.getPharmacyName());
                 intent.putExtra("price", order.getTotalPrice() != null ? "₹" + String.format("%.2f", order.getTotalPrice()) : "₹90.00");
                 intent.putExtra("status", order.getStatus());
                 intent.putExtra("deliveryAddress", order.getDeliveryAddress() != null ? order.getDeliveryAddress() : "Apt 402, Green Avenue, Sector 4, Metro City");
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(OrderHistoryActivity.this, PickupQRActivity.class);
-                intent.putExtra("orderId", order.getId());
-                intent.putExtra("pharmacyName", order.getPharmacyName());
-                intent.putExtra("price", order.getTotalPrice() != null ? "₹" + String.format("%.2f", order.getTotalPrice()) : "₹120.00");
-                intent.putExtra("status", order.getStatus());
+                if (order.getDeliveryOtp() != null && !order.getDeliveryOtp().isEmpty()) {
+                    intent.putExtra("deliveryOtp", order.getDeliveryOtp());
+                }
                 startActivity(intent);
             }
         });
@@ -221,6 +245,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         resp.setTotalPrice(m.getTotalAmount());
                         resp.setOrderDate(m.getTimestamp() != null ? m.getTimestamp() : "Today");
                         resp.setDeliveryAddress(m.getDeliveryAddress());
+                        resp.setDeliveryOtp(m.getOtp());
+                        resp.setPickupQrPayload(m.getQrString());
                         responseList.add(resp);
                     }
                     if (orderAdapter != null) {

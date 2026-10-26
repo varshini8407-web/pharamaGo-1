@@ -117,83 +117,98 @@
 
         </LinearLayout>
 
-        <!-- ALERT BAR: "You have 1 new message from delivery partner | CHAT NOW" (Matching Image 1) -->
-        <LinearLayout
+        <!-- Sleek Collapsed Card / Floating Chip Button: "Chat with Delivery Partner" -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/layoutAlertMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="#FFFFFF"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="6dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_outline"
+            app:cardBackgroundColor="@color/card_surface">
 
-            <!-- Circular Chat Speech Icon Matching Image 1 -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="#CBD5E1"
-                app:cardBackgroundColor="#F8FAFC">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
 
+                <!-- Rounded Chat Chip Icon -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    app:cardCornerRadius="19dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/primary_container">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_chat"
+                        app:tint="@color/primary_clinical_blue"
+                        android:contentDescription="Chat" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/tvAlertMessageTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Delivery Partner"
+                        android:textSize="13.5sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <TextView
+                        android:id="@+id/tvAlertMessageText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Active communication channel"
+                        android:textSize="11.5sp"
+                        android:textColor="@color/neutral_muted" />
+
+                </LinearLayout>
+
+                <!-- Floating Chip Action Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnChatNowAlert"
+                    style="@style/Widget.PharmaGo.Button.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Open Chat 💬"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="0dp"
+                    app:cornerRadius="10dp" />
+
+                <!-- Dismiss Button -->
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_chat"
-                    app:tint="#475569"
-                    android:contentDescription="Message" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:id="@+id/btnDismissAlert"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_close_circle"
+                    app:tint="@color/neutral_muted"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Dismiss" />
 
-            <!-- Message Headline matching Image 1: "You have 1 new message from the\ndelivery partner" -->
-            <TextView
-                android:id="@+id/tvAlertMessageText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="You have 1 new message from the\ndelivery partner"
-                android:textSize="12.5sp"
-                android:textColor="#1E293B"
-                android:lineSpacingExtra="2dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="8dp" />
+            </LinearLayout>
 
-            <!-- "CHAT NOW" Action Button Matching Image 1 -->
-            <TextView
-                android:id="@+id/btnChatNowAlert"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CHAT NOW"
-                android:textSize="12.5sp"
-                android:textStyle="bold"
-                android:textColor="#E11D48"
-                android:letterSpacing="0.03"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp" />
-
-            <!-- Circular Dismiss Button Matching Image 1 -->
-            <ImageView
-                android:id="@+id/btnDismissAlert"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_close_circle"
-                app:tint="#94A3B8"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:layout_marginStart="8dp"
-                android:contentDescription="Dismiss" />
-
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:layout_width="match_parent"
@@ -519,6 +534,46 @@
                         android:text="○ Delivered to Customer"
                         android:textSize="13sp"
                         android:textColor="@color/neutral_muted" />
+
+                    <!-- Requirement Part 1.5: 6-digit Delivery OTP directly below the tracking timeline -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardTrackingOtp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1.2dp"
+                        app:strokeColor="@color/border_outline"
+                        app:cardBackgroundColor="@color/primary_container">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Share this OTP with your delivery agent upon arrival"
+                                android:textSize="12sp"
+                                android:textColor="@color/neutral_muted" />
+
+                            <TextView
+                                android:id="@+id/tvTrackingOtpCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="[ 4 8 2 9 1 5 ]"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.1"
+                                android:textColor="@color/primary_clinical_blue"
+                                android:layout_marginTop="4dp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 

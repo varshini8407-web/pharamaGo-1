@@ -183,43 +183,33 @@
             android:textSize="17sp" />
     </LinearLayout>
 
-    <!-- Action Buttons -->
-    <LinearLayout
+    <!-- Requirement Part 2.1: Single Button "Dispense & Mark Completed" -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirmDispense"
+        style="@style/Widget.PharmaGo.Button.Primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="18dp"
-        android:orientation="horizontal">
+        android:backgroundTint="@color/secondary_mint"
+        android:text="Dispense &amp; Mark Completed"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_check_circle"
+        app:iconTint="@color/white" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelDispense"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-bold"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Cancel"
-            android:textColor="@color/neutral_muted"
-            app:cornerRadius="12dp"
-            app:strokeColor="@color/border_outline" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnConfirmDispense"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="6dp"
-            android:layout_weight="2"
-            android:backgroundTint="@color/secondary_mint"
-            android:fontFamily="sans-serif-bold"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Confirm &amp; Dispense"
-            android:textColor="@color/white"
-            app:cornerRadius="12dp"
-            app:icon="@drawable/ic_check_circle"
-            app:iconTint="@color/white" />
-    </LinearLayout>
+    <!-- Optional Cancel Text / Dismiss -->
+    <TextView
+        android:id="@+id/btnCancelDispense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Cancel &amp; Close"
+        android:textSize="12.5sp"
+        android:textColor="@color/neutral_muted"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="6dp" />
 
 </LinearLayout>

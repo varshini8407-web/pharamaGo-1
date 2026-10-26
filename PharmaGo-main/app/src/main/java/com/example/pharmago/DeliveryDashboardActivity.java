@@ -164,6 +164,12 @@ public class DeliveryDashboardActivity extends AppCompatActivity implements Deli
         // Top refresh button
         btnRefreshDeliveryDashboard.setOnClickListener(v -> loadOrdersAndMetrics(true));
 
+        // Earnings button navigation
+        View btnDeliveryEarningsNav = findViewById(R.id.btnDeliveryEarningsNav);
+        if (btnDeliveryEarningsNav != null) {
+            btnDeliveryEarningsNav.setOnClickListener(v -> startActivity(new Intent(this, DeliveryEarningsActivity.class)));
+        }
+
         // Profile button navigation
         View btnDeliveryProfileNav = findViewById(R.id.btnDeliveryProfileNav);
         if (btnDeliveryProfileNav != null) {
@@ -329,6 +335,36 @@ public class DeliveryDashboardActivity extends AppCompatActivity implements Deli
                     }
                 }
         );
+    }
+
+    @Override
+    public void onDeclineOrder(DeliveryOrderModel order) {
+        if (order == null) return;
+
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle("Decline Delivery")
+                .setMessage("Decline Order #" + order.getOrderId() + "? This order will remain in the pool for other delivery agents and will be removed from your queue.")
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Decline Order", (dialog, which) -> {
+                    com.example.pharmago.services.BackendService.getInstance(this).declineDelivery(
+                            order.getOrderId(),
+                            402L,
+                            "Declined by agent",
+                            new com.example.pharmago.database.DbCallback<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean success) {
+                                    Toast.makeText(DeliveryDashboardActivity.this, "Order #" + order.getOrderId() + " declined and removed from feed.", Toast.LENGTH_SHORT).show();
+                                    loadOrdersAndMetrics(true);
+                                }
+
+                                @Override
+                                public void onFailure(Exception e) {
+                                    Toast.makeText(DeliveryDashboardActivity.this, "Failed to decline order: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
+                })
+                .show();
     }
 
     @Override

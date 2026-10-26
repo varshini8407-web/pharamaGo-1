@@ -33,12 +33,27 @@
         android:layout_marginTop="14dp">
 
         <RadioButton
-            android:id="@+id/rbReasonIllegible"
+            android:id="@+id/rbReasonUnreadable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:fontFamily="sans-serif-medium"
-            android:text="Prescription handwriting illegible / blurry photo"
+            android:text="Prescription unclear / unreadable"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+
+        <RadioButton
+            android:id="@+id/rbReasonExpired"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prescription expired"
+            android:textColor="@color/neutral_dark"
+            android:textSize="13sp" />
+
+        <RadioButton
+            android:id="@+id/rbReasonDoctorSignature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doctor signature missing"
             android:textColor="@color/neutral_dark"
             android:textSize="13sp" />
 
@@ -46,26 +61,15 @@
             android:id="@+id/rbReasonOutOfStock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="Prescribed medicine is out of stock in hospital pharmacy"
+            android:text="Medicines out of stock"
             android:textColor="@color/neutral_dark"
             android:textSize="13sp" />
 
         <RadioButton
-            android:id="@+id/rbReasonDoctorReg"
+            android:id="@+id/rbReasonDosageMismatch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="Doctor registration number / stamp missing"
-            android:textColor="@color/neutral_dark"
-            android:textSize="13sp" />
-
-        <RadioButton
-            android:id="@+id/rbReasonDosage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="Invalid / potentially harmful drug dosage"
+            android:text="Dosage mismatch"
             android:textColor="@color/neutral_dark"
             android:textSize="13sp" />
     </RadioGroup>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_bg"
+    android:backgroundTint="@color/card_surface"
+    android:padding="20dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/badge_bg"
+        android:backgroundTint="@color/border_outline"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Header: Invoice Title & Pharmacy -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tax Invoice Receipt"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark" />
+
+            <TextView
+                android:id="@+id/tvInvoiceOrderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order #102 • Verified Healthcare Bill"
+                android:textSize="12.5sp"
+                android:textColor="@color/neutral_muted"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInvoiceStatusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAID ✓"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_mint"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="@color/secondary_container"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="5dp" />
+
+    </LinearLayout>
+
+    <!-- Pharmacy Details Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/background_surface"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/border_outline"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvInvoicePharmacyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apollo Central Pharmacy"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_clinical_blue" />
+
+            <TextView
+                android:id="@+id/tvInvoicePharmacyAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="License: DL-29384-H • GSTIN: 29AABCU9603R1ZM\nCampus Health Block, Sector 4"
+                android:textSize="11.5sp"
+                android:textColor="@color/neutral_muted"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Table Header: [Medicine Name | Qty | Unit Price | Total] -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="4dp"
+        android:background="@color/primary_container">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.2"
+            android:text="Medicine Name"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/on_primary_container" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="Qty"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/on_primary_container" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="end"
+            android:text="Unit Price"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/on_primary_container" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="end"
+            android:text="Total"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/on_primary_container" />
+
+    </LinearLayout>
+
+    <!-- Dynamic Itemized Rows Container -->
+    <LinearLayout
+        android:id="@+id/layoutInvoiceItemsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="6dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_outline"
+        android:layout_marginVertical="8dp" />
+
+    <!-- Subtotal Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="3dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Subtotal"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted" />
+
+        <TextView
+            android:id="@+id/tvInvoiceSubtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹100.00"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_dark" />
+
+    </LinearLayout>
+
+    <!-- Taxes: CGST (6%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="3dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CGST (6%)"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted" />
+
+        <TextView
+            android:id="@+id/tvInvoiceCgst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹6.00"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_dark" />
+
+    </LinearLayout>
+
+    <!-- Taxes: SGST (6%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="3dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SGST (6%)"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted" />
+
+        <TextView
+            android:id="@+id/tvInvoiceSgst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹6.00"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_dark" />
+
+    </LinearLayout>
+
+    <!-- Delivery Fee Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="3dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delivery Fee"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_muted" />
+
+        <TextView
+            android:id="@+id/tvInvoiceDeliveryFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹0.00"
+            android:textSize="13sp"
+            android:textColor="@color/neutral_dark" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/border_outline"
+        android:layout_marginVertical="10dp" />
+
+    <!-- Total Paid Amount & Payment Mode -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Paid Amount"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark" />
+
+            <TextView
+                android:id="@+id/tvInvoicePaymentMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Mode: UPI (Instant Transfer)"
+                android:textSize="12sp"
+                android:textColor="@color/neutral_muted" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInvoiceTotalPaid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹112.00"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_clinical_blue" />
+
+    </LinearLayout>
+
+    <!-- Close Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCloseInvoice"
+        style="@style/Widget.PharmaGo.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Dismiss Receipt"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

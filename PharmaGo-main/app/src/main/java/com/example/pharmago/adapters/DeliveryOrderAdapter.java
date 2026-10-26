@@ -24,6 +24,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
 
     public interface OnDeliveryOrderClickListener {
         void onAcceptOrder(DeliveryOrderModel order);
+        void onDeclineOrder(DeliveryOrderModel order);
         void onOpenMapNavigation(DeliveryOrderModel order);
         void onVerifyOtp(DeliveryOrderModel order);
         void onCallCustomer(DeliveryOrderModel order);
@@ -108,7 +109,11 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             holder.tvStatusBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.primary_container));
             holder.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.primary_clinical_blue));
 
-            holder.btnAccept.setVisibility(View.VISIBLE);
+            if (holder.layoutNewDeliveryActions != null) {
+                holder.layoutNewDeliveryActions.setVisibility(View.VISIBLE);
+            } else if (holder.btnAccept != null) {
+                holder.btnAccept.setVisibility(View.VISIBLE);
+            }
             holder.layoutInTransitActions.setVisibility(View.GONE);
             holder.btnDeliveredReceipt.setVisibility(View.GONE);
         } else if (status == OrderStatus.OUT_FOR_DELIVERY) {
@@ -116,7 +121,11 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             holder.tvStatusBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.warning_container));
             holder.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.warning_amber));
 
-            holder.btnAccept.setVisibility(View.GONE);
+            if (holder.layoutNewDeliveryActions != null) {
+                holder.layoutNewDeliveryActions.setVisibility(View.GONE);
+            } else if (holder.btnAccept != null) {
+                holder.btnAccept.setVisibility(View.GONE);
+            }
             holder.layoutInTransitActions.setVisibility(View.VISIBLE);
             holder.btnDeliveredReceipt.setVisibility(View.GONE);
         } else {
@@ -124,7 +133,11 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             holder.tvStatusBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.secondary_container));
             holder.tvStatusBadge.setTextColor(ContextCompat.getColor(context, R.color.secondary_mint));
 
-            holder.btnAccept.setVisibility(View.GONE);
+            if (holder.layoutNewDeliveryActions != null) {
+                holder.layoutNewDeliveryActions.setVisibility(View.GONE);
+            } else if (holder.btnAccept != null) {
+                holder.btnAccept.setVisibility(View.GONE);
+            }
             holder.layoutInTransitActions.setVisibility(View.GONE);
             holder.btnDeliveredReceipt.setVisibility(View.VISIBLE);
         }
@@ -134,9 +147,17 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             if (listener != null) listener.onCallCustomer(order);
         });
 
-        holder.btnAccept.setOnClickListener(v -> {
-            if (listener != null) listener.onAcceptOrder(order);
-        });
+        if (holder.btnAccept != null) {
+            holder.btnAccept.setOnClickListener(v -> {
+                if (listener != null) listener.onAcceptOrder(order);
+            });
+        }
+
+        if (holder.btnDecline != null) {
+            holder.btnDecline.setOnClickListener(v -> {
+                if (listener != null) listener.onDeclineOrder(order);
+            });
+        }
 
         holder.btnOpenMapNav.setOnClickListener(v -> {
             if (listener != null) listener.onOpenMapNavigation(order);
@@ -158,7 +179,8 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
         TextView tvPharmacyAddress, tvPatientAddress;
         TextView tvMedSummary, tvPaymentBadge, tvTotalAmount;
         View btnQuickCall;
-        MaterialButton btnAccept, btnOpenMapNav, btnVerifyOtp, btnDeliveredReceipt;
+        View layoutNewDeliveryActions;
+        MaterialButton btnAccept, btnDecline, btnOpenMapNav, btnVerifyOtp, btnDeliveredReceipt;
         View layoutInTransitActions;
 
         public DeliveryViewHolder(@NonNull View itemView) {
@@ -174,7 +196,9 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             tvPaymentBadge = itemView.findViewById(R.id.tvDeliveryPaymentBadge);
             tvTotalAmount = itemView.findViewById(R.id.tvDeliveryTotalAmount);
             btnQuickCall = itemView.findViewById(R.id.btnQuickCallCustomer);
+            layoutNewDeliveryActions = itemView.findViewById(R.id.layoutNewDeliveryActions);
             btnAccept = itemView.findViewById(R.id.btnAcceptDelivery);
+            btnDecline = itemView.findViewById(R.id.btnDeclineDelivery);
             btnOpenMapNav = itemView.findViewById(R.id.btnOpenMapNav);
             btnVerifyOtp = itemView.findViewById(R.id.btnVerifyOtpComplete);
             btnDeliveredReceipt = itemView.findViewById(R.id.btnViewDeliveredReceipt);

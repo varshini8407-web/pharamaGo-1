@@ -52,7 +52,10 @@ public class ProfileActivity extends AppCompatActivity {
         loadProfileData();
 
         // Multiple intuitive entry points to Edit Profile
-        View.OnClickListener editClickListener = v -> showEditProfileDialog();
+        View.OnClickListener editClickListener = v -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        };
 
         if (btnEditProfile != null) btnEditProfile.setOnClickListener(editClickListener);
         if (layoutAvatarClick != null) layoutAvatarClick.setOnClickListener(editClickListener);
@@ -62,11 +65,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (btnLogout != null) {
             btnLogout.setOnClickListener(v -> {
+                com.example.pharmago.utils.SecurePreferencesManager.getInstance(this).clearSession();
+                com.example.pharmago.utils.UserSession.getInstance(this).clearSession();
                 SharedPreferences prefs = getSharedPreferences("PharmaGoPrefs", MODE_PRIVATE);
                 if (prefs != null) {
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.clear();
-                    editor.apply();
+                    prefs.edit().clear().apply();
                 }
 
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
@@ -77,89 +80,53 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void loadProfileData() {
-        SharedPreferences prefs = getSharedPreferences("PharmaGoPrefs", MODE_PRIVATE);
-        if (prefs == null) return;
-
-        String username = prefs.getString("username", "Admin User");
-        String email = prefs.getString("email", "admin@pharmago.com");
-        String phone = prefs.getString("phone", "+91 98765 43210");
-        String bloodGroup = prefs.getString("bloodGroup", "O+ (Universal)");
-        String emergency = prefs.getString("emergencyContact", "+91 98765 43210");
-        String address = prefs.getString("userAddress", "Home • Sector 4, Metro City");
-        long userId = prefs.getLong("userId", 101L);
-
-        if (tvProfileUsername != null) tvProfileUsername.setText(username);
-        if (tvProfileEmail != null) tvProfileEmail.setText(email);
-        if (tvProfilePhone != null) tvProfilePhone.setText(phone);
-        if (tvProfileBloodGroup != null) tvProfileBloodGroup.setText(bloodGroup);
-        if (tvProfileEmergency != null) tvProfileEmergency.setText(emergency);
-        if (tvProfileAddress != null) tvProfileAddress.setText("🏡 " + address);
-        if (tvProfileId != null) tvProfileId.setText(userId == -1L ? "101" : String.valueOf(userId));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadProfileData();
     }
 
-    private void showEditProfileDialog() {
-        SharedPreferences prefs = getSharedPreferences("PharmaGoPrefs", MODE_PRIVATE);
-        if (prefs == null) return;
+    private void loadProfileData() {
+        com.example.pharmago.utils.SecurePreferencesManager securePrefs =
+                com.example.pharmago.utils.SecurePreferencesManager.getInstance(this);
 
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View dialogView = inflater.inflate(R.layout.dialog_edit_profile, null);
+        long userId = securePrefs.getUserId();
+        String cachedName = securePrefs.getFullName();
+        String cachedPhone = securePrefs.getPhone();
+        String cachedAddress = securePrefs.getAddress();
 
-        TextInputEditText etEditName = dialogView.findViewById(R.id.etEditName);
-        TextInputEditText etEditEmail = dialogView.findViewById(R.id.etEditEmail);
-        TextInputEditText etEditPhone = dialogView.findViewById(R.id.etEditPhone);
-        TextInputEditText etEditAddress = dialogView.findViewById(R.id.etEditAddress);
-        TextInputEditText etEditBloodGroup = dialogView.findViewById(R.id.etEditBloodGroup);
-        TextInputEditText etEditEmergency = dialogView.findViewById(R.id.etEditEmergency);
-        Button btnSaveProfileDialog = dialogView.findViewById(R.id.btnSaveProfileDialog);
-        Button btnCancelProfileDialog = dialogView.findViewById(R.id.btnCancelProfileDialog);
+        if (tvProfileUsername != null) tvProfileUsername.setText(cachedName);
+        if (tvProfileEmail != null) tvProfileEmail.setText(securePrefs.getUsername());
+        if (tvProfilePhone != null) tvProfilePhone.setText(cachedPhone);
+        if (tvProfileAddress != null) tvProfileAddress.setText("🏡 " + cachedAddress);
+        if (tvProfileId != null) tvProfileId.setText(String.valueOf(userId));
 
-        // Pre-fill with current profile values
-        if (etEditName != null) etEditName.setText(prefs.getString("username", "Admin User"));
-        if (etEditEmail != null) etEditEmail.setText(prefs.getString("email", "admin@pharmago.com"));
-        if (etEditPhone != null) etEditPhone.setText(prefs.getString("phone", "+91 98765 43210"));
-        if (etEditAddress != null) etEditAddress.setText(prefs.getString("userAddress", "Home • Sector 4, Metro City"));
-        if (etEditBloodGroup != null) etEditBloodGroup.setText(prefs.getString("bloodGroup", "O+ (Universal)"));
-        if (etEditEmergency != null) etEditEmergency.setText(prefs.getString("emergencyContact", "+91 98765 43210"));
+        // Requirement Part 1.6: On ProfileActivity.onCreate(), fetch fresh user data via BackendService.getUserProfile(userId)
+        com.example.pharmago.services.BackendService.getInstance(this).getUserProfile(userId, new com.example.pharmago.database.DbCallback<com.example.pharmago.models.UserAuthResult>() {
+            @Override
+            public void onSuccess(com.example.pharmago.models.UserAuthResult user) {
+                if (user != null) {
+                    if (user.getFullName() != null && !user.getFullName().isEmpty()) {
+                        if (tvProfileUsername != null) tvProfileUsername.setText(user.getFullName());
+                    }
+                    if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+                        if (tvProfileEmail != null) tvProfileEmail.setText(user.getUsername());
+                    }
+                    if (user.getPhone() != null && !user.getPhone().isEmpty()) {
+                        if (tvProfilePhone != null) tvProfilePhone.setText(user.getPhone());
+                    }
+                    if (user.getAddress() != null && !user.getAddress().isEmpty()) {
+                        if (tvProfileAddress != null) tvProfileAddress.setText("🏡 " + user.getAddress());
+                    }
+                    // Update local secure cache
+                    securePrefs.updateProfileData(user.getFullName(), user.getPhone(), user.getAddress());
+                }
+            }
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setView(dialogView)
-                .setCancelable(true)
-                .create();
-
-        if (btnCancelProfileDialog != null) {
-            btnCancelProfileDialog.setOnClickListener(v -> dialog.dismiss());
-        }
-
-        if (btnSaveProfileDialog != null) {
-            btnSaveProfileDialog.setOnClickListener(v -> {
-                String newName = etEditName != null && etEditName.getText() != null ? etEditName.getText().toString().trim() : "Admin User";
-                String newEmail = etEditEmail != null && etEditEmail.getText() != null ? etEditEmail.getText().toString().trim() : "admin@pharmago.com";
-                String newPhone = etEditPhone != null && etEditPhone.getText() != null ? etEditPhone.getText().toString().trim() : "+91 98765 43210";
-                String newAddress = etEditAddress != null && etEditAddress.getText() != null ? etEditAddress.getText().toString().trim() : "Home • Sector 4, Metro City";
-                String newBlood = etEditBloodGroup != null && etEditBloodGroup.getText() != null ? etEditBloodGroup.getText().toString().trim() : "O+ (Universal)";
-                String newEmergency = etEditEmergency != null && etEditEmergency.getText() != null ? etEditEmergency.getText().toString().trim() : "+91 98765 43210";
-
-                if (newName.isEmpty()) newName = "Admin User";
-                if (newAddress.isEmpty()) newAddress = "Home • Sector 4, Metro City";
-
-                // Persist to SharedPreferences
-                prefs.edit()
-                        .putString("username", newName)
-                        .putString("email", newEmail)
-                        .putString("phone", newPhone)
-                        .putString("userAddress", newAddress)
-                        .putString("bloodGroup", newBlood)
-                        .putString("emergencyContact", newEmergency)
-                        .apply();
-
-                // Update UI immediately
-                loadProfileData();
-                dialog.dismiss();
-                Toast.makeText(ProfileActivity.this, "Profile updated successfully! ✓", Toast.LENGTH_SHORT).show();
-            });
-        }
-
-        dialog.show();
+            @Override
+            public void onFailure(Exception e) {
+                // Keep encrypted local cached values
+            }
+        });
     }
 }

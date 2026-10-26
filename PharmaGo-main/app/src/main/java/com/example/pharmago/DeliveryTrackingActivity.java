@@ -113,6 +113,49 @@ public class DeliveryTrackingActivity extends AppCompatActivity {
 
         applyTrackingState(passedStatus);
 
+        TextView tvTrackingOtpCode = findViewById(R.id.tvTrackingOtpCode);
+        if (tvTrackingOtpCode != null) {
+            String passedOtp = intent.getStringExtra("deliveryOtp");
+            if (passedOtp != null && !passedOtp.trim().isEmpty()) {
+                String clean = passedOtp.trim();
+                if (clean.length() == 6) {
+                    tvTrackingOtpCode.setText(String.format("[ %c %c %c %c %c %c ]",
+                            clean.charAt(0), clean.charAt(1), clean.charAt(2),
+                            clean.charAt(3), clean.charAt(4), clean.charAt(5)));
+                } else {
+                    tvTrackingOtpCode.setText("[ " + clean + " ]");
+                }
+            } else {
+                long orderNum = orderId != null ? orderId : 103L;
+                int digit1 = (int) ((orderNum * 7 + 1) % 9) + 1;
+                int digit2 = (int) ((orderNum * 3 + 2) % 9) + 1;
+                int digit3 = (int) ((orderNum * 5 + 4) % 9) + 1;
+                int digit4 = (int) ((orderNum * 2 + 5) % 9) + 1;
+                int digit5 = (int) ((orderNum * 8 + 3) % 9) + 1;
+                int digit6 = (int) ((orderNum * 4 + 7) % 9) + 1;
+                tvTrackingOtpCode.setText(String.format(Locale.getDefault(), "[ %d %d %d %d %d %d ]", digit1, digit2, digit3, digit4, digit5, digit6));
+            }
+
+            com.example.pharmago.services.BackendService.getInstance(this).getOrderDeliveryOtp(orderId != null ? orderId : 103L, new com.example.pharmago.database.DbCallback<String>() {
+                @Override
+                public void onSuccess(String liveOtp) {
+                    if (liveOtp != null && !liveOtp.trim().isEmpty()) {
+                        String clean = liveOtp.trim();
+                        if (clean.length() == 6) {
+                            tvTrackingOtpCode.setText(String.format("[ %c %c %c %c %c %c ]",
+                                    clean.charAt(0), clean.charAt(1), clean.charAt(2),
+                                    clean.charAt(3), clean.charAt(4), clean.charAt(5)));
+                        } else {
+                            tvTrackingOtpCode.setText("[ " + clean + " ]");
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Exception e) {}
+            });
+        }
+
         if (btnBackDelivery != null) {
             btnBackDelivery.setOnClickListener(v -> finish());
         }

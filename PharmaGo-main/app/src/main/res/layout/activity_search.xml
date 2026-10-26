@@ -104,12 +104,20 @@
                 app:checkedChip="@id/chipAll">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAll"
+                    android:id="@+id/chipPharmacies"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All"
-                    android:checked="true"
+                    android:text="🏪 Pharmacies &amp; Clinics"
+                    app:chipCornerRadius="16dp"
+                    app:chipStrokeColor="@color/border_outline" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHospitals"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🏥 Hospitals"
                     app:chipCornerRadius="16dp"
                     app:chipStrokeColor="@color/border_outline" />
 
@@ -123,20 +131,12 @@
                     app:chipStrokeColor="@color/border_outline" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipPharmacies"
+                    android:id="@+id/chipAll"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏥 Pharmacies"
-                    app:chipCornerRadius="16dp"
-                    app:chipStrokeColor="@color/border_outline" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipHospitals"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🏨 Hospitals"
+                    android:text="All"
+                    android:checked="true"
                     app:chipCornerRadius="16dp"
                     app:chipStrokeColor="@color/border_outline" />
 
@@ -145,7 +145,7 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="✅ In Stock"
+                    android:text="✅ In Stock Only"
                     app:chipCornerRadius="16dp"
                     app:chipStrokeColor="@color/border_outline" />
 

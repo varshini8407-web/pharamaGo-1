@@ -12,15 +12,21 @@ public class UserAuthResult implements Serializable {
     private String fullName;
     private String email;
     private String phone;
+    private String address;
     private String role;
     private String token;
 
     public UserAuthResult(Long userId, String username, String fullName, String email, String phone, String role, String token) {
+        this(userId, username, fullName, email, phone, "Apollo Sector 4, Metro City", role, token);
+    }
+
+    public UserAuthResult(Long userId, String username, String fullName, String email, String phone, String address, String role, String token) {
         this.userId = userId;
         this.username = username;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.address = address != null ? address : "Apollo Sector 4, Metro City";
         this.role = role != null ? role.toUpperCase() : "CUSTOMER";
         this.token = token;
     }
@@ -43,6 +49,14 @@ public class UserAuthResult implements Serializable {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getRole() {

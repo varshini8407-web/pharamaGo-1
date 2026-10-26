@@ -15,9 +15,24 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }, 1500);
+            com.example.pharmago.utils.UserSession session = com.example.pharmago.utils.UserSession.getInstance(SplashActivity.this);
+            if (session.isLoggedIn()) {
+                String role = session.getRole();
+                Intent intent;
+                if ("PHARMACIST".equalsIgnoreCase(role)) {
+                    intent = new Intent(SplashActivity.this, PharmacistHomeActivity.class);
+                } else if ("DELIVERY".equalsIgnoreCase(role)) {
+                    intent = new Intent(SplashActivity.this, DeliveryDashboardActivity.class);
+                } else {
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
+                }
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 1200);
     }
 }

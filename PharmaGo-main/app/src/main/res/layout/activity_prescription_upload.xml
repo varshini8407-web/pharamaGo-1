@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Top App Bar with Back Button -->
+        <!-- Top Header Navigation -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Instant Rx Scanner"
+                    android:text="Upload Prescription"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/neutral_dark" />
@@ -57,224 +57,30 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AI-powered medical prescription reader"
+                    android:text="Direct pharmacy verification &amp; dispensing"
                     android:textSize="12sp"
                     android:textColor="@color/neutral_muted" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Standalone/Medicine Context Card (Visible if launched for a specific medicine) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardOrderDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/border_outline"
-            app:cardBackgroundColor="@color/card_surface"
-            android:layout_marginBottom="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Active Prescription Request"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_clinical_blue" />
-
-                <TextView
-                    android:id="@+id/tvOrderDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Medicine: All Prescribed Items • Verified by AI OCR"
-                    android:textSize="13sp"
-                    android:textColor="@color/neutral_dark"
-                    android:layout_marginTop="4dp" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Scanner Viewfinder Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardScannerViewfinder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="1.5dp"
-            app:strokeColor="#93C5FD"
-            app:cardBackgroundColor="@color/card_surface"
-            android:layout_marginBottom="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:gravity="center">
-
-                <!-- Scanner Viewport HUD Box -->
-                <RelativeLayout
-                    android:id="@+id/layoutViewfinder"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="#0A192F"
-                    android:gravity="center">
-
-                    <!-- Document / Rx Preview Image -->
-                    <ImageView
-                        android:id="@+id/ivScannedPreview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:alpha="0.85"
-                        android:contentDescription="Scanned Document Preview" />
-
-                    <!-- Scanner Reticle Graphic / Guide -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/ic_nav_prescription"
-                            app:tint="@color/secondary_mint"
-                            android:contentDescription="Prescription" />
-
-                        <TextView
-                            android:id="@+id/tvScannerStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Align doctor's prescription inside frame"
-                            android:textSize="12sp"
-                            android:textColor="#E2E8F0"
-                            android:layout_marginTop="8dp" />
-
-                    </LinearLayout>
-
-                    <!-- Scanning Laser Beam Indicator -->
-                    <View
-                        android:id="@+id/viewLaserLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:background="@color/secondary_mint"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
-                <!-- Status message -->
-                <TextView
-                    android:id="@+id/tvPrescriptionMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select scanning method below to extract items"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_clinical_blue"
-                    android:gravity="center"
-                    android:layout_marginTop="14dp" />
-
-                <!-- Action Scanning Option Buttons -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="14dp">
-
-                    <!-- Camera Scan Option -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnScanCamera"
-                        style="@style/Widget.PharmaGo.Button.Primary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Camera Scan"
-                        android:textAllCaps="false"
-                        android:textSize="12sp"
-                        app:icon="@drawable/ic_camera"
-                        app:iconTint="@color/white"
-                        app:iconGravity="textStart"
-                        android:layout_marginEnd="6dp" />
-
-                    <!-- Gallery / File Upload Option -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnUploadPrescription"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Choose File"
-                        android:textAllCaps="false"
-                        android:textSize="12sp"
-                        android:textColor="@color/primary_clinical_blue"
-                        app:strokeColor="@color/primary_clinical_blue"
-                        app:icon="@drawable/ic_upload_cloud"
-                        app:iconTint="@color/primary_clinical_blue"
-                        app:iconGravity="textStart"
-                        android:layout_marginStart="6dp" />
-
-                </LinearLayout>
-
-                <!-- One-tap Instant Sample Scan -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnScanDemo"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⚡ Try Sample Prescription Scan"
-                    android:textColor="@color/secondary_mint"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:textSize="12sp"
-                    android:layout_marginTop="6dp" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Progress Indicator for OCR Engine -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/primary_clinical_blue"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp" />
-
-        <!-- DETECTED ITEMS CONTAINER (Shows extracted medicines, doctor info, doses, prices) -->
+        <!-- STATE 1: UPLOAD FORM CONTAINER -->
         <LinearLayout
-            android:id="@+id/layoutDetectedItems"
+            android:id="@+id/layoutUploadForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical">
 
-            <!-- Physician Verification Header Card -->
+            <!-- Pharmacy Fulfillment Target Banner -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/secondary_mint"
-                app:cardBackgroundColor="@color/card_surface"
-                android:layout_marginBottom="12dp">
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/primary_container"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -284,258 +90,401 @@
                     android:padding="14dp">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_check_circle"
-                        app:tint="@color/secondary_mint"
-                        android:contentDescription="Verified" />
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_medical_cross"
+                        app:tint="@color/primary_clinical_blue"
+                        android:contentDescription="Pharmacy" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="10dp">
+                        android:layout_marginStart="12dp">
 
                         <TextView
+                            android:id="@+id/tvPrescriptionPharmacyName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dr. Arvind Sharma, MBBS, MD"
+                            android:text="Apollo Metro Pharmacy"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
+                            android:textColor="@color/on_primary_container" />
 
                         <TextView
+                            android:id="@+id/tvOrderDetails"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Apollo Clinic • Digital Rx #RX-8942 • Verified ✓"
-                            android:textSize="11sp"
-                            android:textColor="@color/secondary_mint"
-                            android:textStyle="bold" />
+                            android:text="Direct Pharmacist Review • Payment unlocked after verification"
+                            android:textSize="11.5sp"
+                            android:textColor="@color/neutral_muted"
+                            android:layout_marginTop="2dp" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Detected Items Title -->
+            <!-- Image Capture / Preview Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPrescriptionPreview"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="1.5dp"
+                app:strokeColor="@color/border_outline"
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="14dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Default Placeholder -->
+                    <LinearLayout
+                        android:id="@+id/layoutPlaceholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="20dp">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_upload_cloud"
+                            app:tint="@color/primary_clinical_blue"
+                            android:contentDescription="Upload placeholder" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No Prescription Selected"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/neutral_dark"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvPrescriptionMessage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Capture a clear photo of doctor's handwritten or printed prescription"
+                            android:textSize="12sp"
+                            android:textColor="@color/neutral_muted"
+                            android:gravity="center"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image Preview -->
+                    <ImageView
+                        android:id="@+id/ivScannedPreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone"
+                        android:contentDescription="Prescription Preview" />
+
+                    <!-- Selected Badge -->
+                    <TextView
+                        android:id="@+id/tvFileSelectedBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="@color/secondary_container"
+                        android:text="✓ Photo Attached"
+                        android:textColor="@color/on_secondary_container"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Actions Row: Camera & Gallery -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnScanCamera"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:text="Camera Photo"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    app:icon="@drawable/ic_camera"
+                    app:cornerRadius="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUploadPrescription"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:text="Upload File"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    app:icon="@drawable/ic_upload_cloud"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="@color/border_outline" />
+            </LinearLayout>
+
+            <!-- MANDATORY SELECTION: Order Type (Takeaway vs Delivery) -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detected Medicines &amp; Dosages (4 Items)"
+                android:text="Select Fulfillment Method (Required)"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/neutral_dark"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="10dp" />
 
-            <!-- Item 1: Amoxicillin 500mg -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
+                android:id="@+id/layoutOrderTypeSelection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_outline"
-                app:cardBackgroundColor="@color/card_surface"
-                android:layout_marginBottom="8dp">
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
 
-                <LinearLayout
+                <!-- Option 1: Takeaway -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardOptionTakeaway"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/primary_clinical_blue"
+                    app:cardBackgroundColor="#EBF3FC"
+                    android:layout_marginBottom="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="14dp">
 
-                        <TextView
+                        <RadioButton
+                            android:id="@+id/rbTakeaway"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:buttonTint="@color/primary_clinical_blue" />
+
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="1. Amoxicillin 500mg Capsules"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="₹85.00"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/primary_clinical_blue" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Takeaway (Counter Pickup)"
+                                android:textSize="14.5sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/neutral_dark" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pick up directly at pharmacy counter • No delivery fee ($0)"
+                                android:textSize="12sp"
+                                android:textColor="@color/neutral_muted" />
+                        </LinearLayout>
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Qty: 1 Strip (10 Caps) • Dosage: 1 cap twice daily after food"
-                        android:textSize="12sp"
-                        android:textColor="@color/neutral_muted"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Item 2: Paracetamol 650mg -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_outline"
-                app:cardBackgroundColor="@color/card_surface"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
+                <!-- Option 2: Doorstep Delivery -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardOptionDelivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_outline"
+                    app:cardBackgroundColor="@color/card_surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="14dp">
 
-                        <TextView
+                        <RadioButton
+                            android:id="@+id/rbDelivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:buttonTint="@color/primary_clinical_blue" />
+
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="2. Paracetamol 650mg (Dolo)"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="₹32.00"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/primary_clinical_blue" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Doorstep Delivery"
+                                android:textSize="14.5sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/neutral_dark" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Temperature controlled express courier delivery to home"
+                                android:textSize="12sp"
+                                android:textColor="@color/neutral_muted" />
+                        </LinearLayout>
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Qty: 1 Strip (15 Tabs) • Dosage: 1 tab SOS for fever/pain"
-                        android:textSize="12sp"
-                        android:textColor="@color/neutral_muted"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-            <!-- Item 3: Cetirizine 10mg -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Delivery Address Section (Visible when Delivery selected) -->
+            <LinearLayout
+                android:id="@+id/layoutDeliveryAddressInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_outline"
-                app:cardBackgroundColor="@color/card_surface"
-                android:layout_marginBottom="8dp">
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:text="Delivery Address"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/neutral_dark"
+                    android:layout_marginBottom="4dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="3. Cetirizine 10mg Tablets"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="₹28.00"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/primary_clinical_blue" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Qty: 1 Strip (10 Tabs) • Dosage: 1 tab at bedtime"
-                        android:textSize="12sp"
-                        android:textColor="@color/neutral_muted"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Item 4: Pantoprazole 40mg -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_outline"
-                app:cardBackgroundColor="@color/card_surface"
-                android:layout_marginBottom="12dp">
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etPrescriptionAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:background="@drawable/edittext_border"
+                    android:padding="12dp"
+                    android:textSize="13.5sp"
+                    android:textColor="@color/neutral_dark"
+                    android:hint="Enter full delivery address" />
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+            <ProgressBar
+                android:id="@+id/pbSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/primary_clinical_blue"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="4. Pantoprazole 40mg (Pan-40)"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
+            <!-- Primary Submission CTA Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmitPrescription"
+                style="@style/Widget.PharmaGo.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Send to Pharmacy for Approval"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                app:cornerRadius="14dp"
+                android:layout_marginBottom="16dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="₹55.00"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/primary_clinical_blue" />
-                    </LinearLayout>
+        </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Qty: 1 Strip (10 Tabs) • Dosage: 1 tab morning before breakfast"
-                        android:textSize="12sp"
-                        android:textColor="@color/neutral_muted"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
+        <!-- STATE 2: EXPLICIT STATUS SCREEN (Visible after submission) -->
+        <LinearLayout
+            android:id="@+id/layoutPendingApprovalStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:paddingTop="20dp">
+
+            <!-- Success Checkmark Badge -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/secondary_container"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_check_circle"
+                    app:tint="@color/secondary_mint"
+                    android:contentDescription="Submitted" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Bill & Pharmacy Matching Summary Card -->
+            <TextView
+                android:id="@+id/tvStatusHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prescription Sent to Pharmacy"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral_dark"
+                android:gravity="center" />
+
+            <!-- Highlighted Amber Pill: Awaiting Pharmacist Approval -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏳ Awaiting pharmacist approval before payment"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/on_warning_container"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/warning_container"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="18dp" />
+
+            <!-- Order Confirmation Details Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="1dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/border_outline"
-                app:cardBackgroundColor="@color/primary_container"
-                android:layout_marginBottom="16dp">
+                app:cardBackgroundColor="@color/card_surface"
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -543,51 +492,81 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/tvConfirmedOrderId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order #8094 (Direct Review)"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/neutral_dark" />
+
+                    <TextView
+                        android:id="@+id/tvConfirmedFulfillment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fulfillment: Takeaway (Counter Pickup)"
+                        android:textSize="13sp"
+                        android:textColor="@color/neutral_muted"
+                        android:layout_marginTop="4dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_outline"
+                        android:layout_marginVertical="12dp" />
+
+                    <!-- Strict Block Notice -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_bell"
+                            app:tint="@color/warning_amber"
+                            android:contentDescription="Notice" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Total Prescription Bill"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/neutral_dark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="₹200.00"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/primary_clinical_blue" />
+                            android:text="Payment is strictly blocked until the pharmacist verifies medicine stock and dosage."
+                            android:textSize="12.5sp"
+                            android:textColor="@color/neutral_dark"
+                            android:layout_marginStart="10dp" />
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="🏥 In Stock at: Apollo Metro Pharmacy (0.8 km)"
-                        android:textSize="12sp"
-                        android:textColor="@color/neutral_muted"
-                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+            <!-- Navigation Buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewOrderHistory"
+                style="@style/Widget.PharmaGo.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="View in Order History"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="12dp"
+                android:layout_marginBottom="10dp" />
 
-        <!-- Primary Action Button: Proceed to Summary & Checkout -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnContinue"
-            style="@style/Widget.PharmaGo.Button.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Proceed to Summary &amp; Checkout"
-            android:textAllCaps="false"
-            android:enabled="true" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReturnHome"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Back to Dashboard"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/border_outline" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -131,11 +131,6 @@ public class HomeActivity extends AppCompatActivity {
             btnNotification.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, NotificationActivity.class)));
         }
 
-        View cardPharmacistPortalHome = findViewById(R.id.cardPharmacistPortalHome);
-        if (cardPharmacistPortalHome != null) {
-            cardPharmacistPortalHome.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, PharmacistHomeActivity.class)));
-        }
-
         // Search Input handling
         if (etHomeSearch != null) {
             etHomeSearch.setOnEditorActionListener((v, actionId, event) -> {

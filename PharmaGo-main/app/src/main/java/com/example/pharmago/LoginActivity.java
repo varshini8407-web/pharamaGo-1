@@ -211,18 +211,18 @@ public class LoginActivity extends AppCompatActivity {
     private void routeAuthenticatedUser(com.example.pharmago.models.UserAuthResult auth) {
         if (auth == null) return;
 
-        SharedPreferences prefs = getSharedPreferences("PharmaGoPrefs", MODE_PRIVATE);
-        if (prefs != null) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("token", auth.getToken() != null ? auth.getToken() : "jwt_token");
-            editor.putLong("userId", auth.getUserId() != null ? auth.getUserId() : 101L);
-            editor.putString("username", auth.getUsername() != null ? auth.getUsername() : "User");
-            editor.putString("email", auth.getEmail() != null ? auth.getEmail() : "user@pharmago.com");
-            editor.putString("role", auth.getRole());
-            editor.apply();
-        }
+        // Requirement Part 1.6 & 2.1: Store session into UserSession & SecurePreferencesManager
+        com.example.pharmago.utils.SecurePreferencesManager.saveUserSession(this, auth);
+        com.example.pharmago.utils.UserSession.getInstance(this).saveUser(
+                auth.getUserId(),
+                auth.getUsername(),
+                auth.getRole(),
+                auth.getFullName(),
+                auth.getPhone(),
+                auth.getAddress()
+        );
 
-        Toast.makeText(LoginActivity.this, "Welcome, " + auth.getUsername() + "!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "Welcome, " + (auth.getFullName() != null ? auth.getFullName() : auth.getUsername()) + "!", Toast.LENGTH_SHORT).show();
 
         // Requirement 3: Check returned user role and route to HomeActivity (PATIENT), PharmacistHomeActivity (PHARMACIST), or DeliveryDashboardActivity (DELIVERY)
         if (auth.isDelivery()) {

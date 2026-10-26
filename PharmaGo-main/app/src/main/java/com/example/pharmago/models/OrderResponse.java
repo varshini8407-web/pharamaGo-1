@@ -36,6 +36,15 @@ public class OrderResponse {
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
 
+    private String deliveryOtp;
+    private String pickupQrPayload;
+
+    public String getDeliveryOtp() { return deliveryOtp; }
+    public void setDeliveryOtp(String deliveryOtp) { this.deliveryOtp = deliveryOtp; }
+
+    public String getPickupQrPayload() { return pickupQrPayload; }
+    public void setPickupQrPayload(String pickupQrPayload) { this.pickupQrPayload = pickupQrPayload; }
+
     public static class OrderItem {
         private String medicineName;
         private Integer quantity;

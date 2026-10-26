@@ -21,7 +21,25 @@ public class OrderModel implements Serializable {
     private String paymentStatus = "PAID ONLINE (UPI)";
     private String rejectionReason;
     private boolean prescriptionRequired = true;
+    private Long pharmacyId = 1L;
+    private String pharmacyName = "Apollo Metro Pharmacy";
     private List<PrescriptionMedicineItem> medicineList = new ArrayList<>();
+
+    public Long getPharmacyId() {
+        return pharmacyId != null ? pharmacyId : 1L;
+    }
+
+    public void setPharmacyId(Long pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
+
+    public String getPharmacyName() {
+        return pharmacyName != null ? pharmacyName : "Apollo Metro Pharmacy";
+    }
+
+    public void setPharmacyName(String pharmacyName) {
+        this.pharmacyName = pharmacyName;
+    }
 
     public OrderModel() {}
 
@@ -117,6 +135,14 @@ public class OrderModel implements Serializable {
 
     public void setPrescriptionImageUrl(String prescriptionImageUrl) {
         this.prescriptionImageUrl = prescriptionImageUrl;
+    }
+
+    public String getPrescriptionImagePath() {
+        return prescriptionImageUrl;
+    }
+
+    public void setPrescriptionImagePath(String prescriptionImagePath) {
+        this.prescriptionImageUrl = prescriptionImagePath;
     }
 
     public Double getTotalAmount() {

@@ -12,11 +12,17 @@ public class InventoryItem implements Serializable {
     private String batchNo;
     private String expiryDate;
     private int dispensedCount;
+    private boolean rxRequired;
 
     public InventoryItem() {}
 
     public InventoryItem(Long medicineId, String medicineName, String dosage, int availableStock,
                          double unitPrice, String category, String batchNo, String expiryDate, int dispensedCount) {
+        this(medicineId, medicineName, dosage, availableStock, unitPrice, category, batchNo, expiryDate, dispensedCount, false);
+    }
+
+    public InventoryItem(Long medicineId, String medicineName, String dosage, int availableStock,
+                         double unitPrice, String category, String batchNo, String expiryDate, int dispensedCount, boolean rxRequired) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.dosage = dosage;
@@ -26,6 +32,7 @@ public class InventoryItem implements Serializable {
         this.batchNo = batchNo;
         this.expiryDate = expiryDate;
         this.dispensedCount = dispensedCount;
+        this.rxRequired = rxRequired;
     }
 
     public Long getMedicineId() {
@@ -110,5 +117,13 @@ public class InventoryItem implements Serializable {
 
     public int getStockQty() {
         return availableStock;
+    }
+
+    public boolean isRxRequired() {
+        return rxRequired;
+    }
+
+    public void setRxRequired(boolean rxRequired) {
+        this.rxRequired = rxRequired;
     }
 }

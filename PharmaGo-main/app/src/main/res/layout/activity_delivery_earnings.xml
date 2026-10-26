@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_clinical_blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="16dp">
+
+            <ImageView
+                android:id="@+id/btnEarningsBack"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Earnings &amp; Analytics"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvEarningsAgentSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Agent Rajesh Kumar • DEL402"
+                    android:textColor="#BFDBFE"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnRefreshEarnings"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Refresh"
+                android:padding="8dp"
+                android:src="@drawable/ic_refresh"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshEarnings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+
+                    <!-- Metric 1: Today's Total Earnings & Trip Count Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardBackgroundColor="@color/card_surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="@color/border_outline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:letterSpacing="0.06"
+                                android:text="TODAY'S PAYOUT &amp; TRIPS"
+                                android:textColor="@color/neutral_muted"
+                                android:textSize="11sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tvTodayEarningsTotal"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-black"
+                                    android:text="₹225.00"
+                                    android:textColor="@color/primary_clinical_blue"
+                                    android:textSize="30sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTodayTripsBadge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/badge_bg"
+                                    android:backgroundTint="@color/secondary_container"
+                                    android:fontFamily="sans-serif-bold"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="3 Completed Trips"
+                                    android:textColor="@color/on_secondary_container"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginVertical="12dp"
+                                android:background="@color/border_outline" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif"
+                                        android:text="Base Payout"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11.5sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvTodayBasePayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="sans-serif-bold"
+                                        android:text="₹170.00"
+                                        android:textColor="@color/neutral_dark"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif"
+                                        android:text="Tips Received"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11.5sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvTodayTips"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="sans-serif-bold"
+                                        android:text="₹55.00"
+                                        android:textColor="@color/secondary_mint"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif"
+                                        android:text="Avg / Delivery"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11.5sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvTodayAverage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="sans-serif-bold"
+                                        android:text="₹75.00"
+                                        android:textColor="@color/neutral_dark"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Metric 2: Weekly Earnings & Chart Bar Summary Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="12dp"
+                        app:cardBackgroundColor="@color/card_surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="@color/border_outline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:letterSpacing="0.06"
+                                        android:text="WEEKLY EARNINGS SUMMARY"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvWeeklyEarningsTotal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-black"
+                                        android:text="₹2,215.00"
+                                        android:textColor="@color/neutral_dark"
+                                        android:textSize="22sp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/badge_bg"
+                                    android:backgroundTint="@color/primary_container"
+                                    android:fontFamily="sans-serif-bold"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="4dp"
+                                    android:text="Last 7 Days"
+                                    android:textColor="@color/primary_clinical_blue"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+
+                            <!-- Weekly 7-Day Bar Chart Visualizer -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_marginTop="16dp"
+                                android:gravity="bottom"
+                                android:orientation="horizontal">
+
+                                <!-- Mon -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barMon"
+                                        android:layout_width="16dp"
+                                        android:layout_height="48dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="M"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Tue -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barTue"
+                                        android:layout_width="16dp"
+                                        android:layout_height="62dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="T"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Wed -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barWed"
+                                        android:layout_width="16dp"
+                                        android:layout_height="36dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="W"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Thu -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barThu"
+                                        android:layout_width="16dp"
+                                        android:layout_height="78dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="T"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Fri -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barFri"
+                                        android:layout_width="16dp"
+                                        android:layout_height="70dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="F"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Sat -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barSat"
+                                        android:layout_width="16dp"
+                                        android:layout_height="88dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/primary_clinical_blue" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="S"
+                                        android:textColor="@color/neutral_muted"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                                <!-- Sun (Today) -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:orientation="vertical">
+                                    <View
+                                        android:id="@+id/barToday"
+                                        android:layout_width="16dp"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/badge_bg"
+                                        android:backgroundTint="@color/secondary_mint" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-bold"
+                                        android:text="Today"
+                                        android:textColor="@color/secondary_mint"
+                                        android:textSize="11sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Section Header: Trip History -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Trip Payout History"
+                            android:textColor="@color/neutral_dark"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvTripCountSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Showing recent trips"
+                            android:textColor="@color/neutral_muted"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- RecyclerView for Trip History -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTripHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                    <!-- Empty State for Trip History -->
+                    <LinearLayout
+                        android:id="@+id/layoutEmptyTrips"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:src="@drawable/ic_delivery"
+                            app:tint="@color/neutral_muted" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:text="No Completed Trips Yet"
+                            android:textColor="@color/neutral_dark"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Complete delivery runs to earn base payouts and tips."
+                            android:textColor="@color/neutral_muted"
+                            android:textSize="12.5sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

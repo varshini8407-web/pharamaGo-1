@@ -63,16 +63,19 @@ public class SearchActivity extends AppCompatActivity {
             recyclerView.setNestedScrollingEnabled(false);
         }
 
-        // Requirement 3: Inject 3-5 items of hardcoded mock data with dummy prices and store names
+        // Requirement 3: Distinct Sections (Pharmacies/Shops, Hospitals, Medicines)
         List<SearchItem> mockItems = createMockSearchData();
         searchAdapter = new SearchAdapter(mockItems, item -> {
             if (item == null) return;
-            Intent intent = new Intent(SearchActivity.this, OrderTypeActivity.class);
-            intent.putExtra("medicineId", item.getId());
-            intent.putExtra("medicineName", item.getMedicineName());
+            // Requirement Part 1.3: Tapping a medicine or pharmacy card navigates directly to PharmacyDetailsActivity passing pharmacy_id
+            Intent intent = new Intent(SearchActivity.this, PharmacyDetailsActivity.class);
+            intent.putExtra("pharmacy_id", item.getPharmacyId());
+            intent.putExtra("pharmacyId", item.getPharmacyId());
             intent.putExtra("pharmacyName", item.getPharmacyName());
-            intent.putExtra("price", item.getPrice());
-            intent.putExtra("requiresPrescription", item.isRequiresPrescription());
+            intent.putExtra("selectedMedicineName", item.getMedicineName());
+            intent.putExtra("selectedMedicinePrice", item.getPrice());
+            intent.putExtra("selectedMedicineDosage", item.getDosage());
+            intent.putExtra("selectedMedicineRx", item.isRequiresPrescription());
             startActivity(intent);
         });
 
@@ -80,21 +83,21 @@ public class SearchActivity extends AppCompatActivity {
             recyclerView.setAdapter(searchAdapter);
         }
 
-        // Horizontal Chip Filter listener
+        // Horizontal Filter Tabs listener
         if (chipGroupFilters != null) {
             chipGroupFilters.setOnCheckedStateChangeListener((group, checkedIds) -> {
                 if (checkedIds.isEmpty() || searchAdapter == null) return;
                 int id = checkedIds.get(0);
                 if (id == R.id.chipAll) {
-                    searchAdapter.filter("");
+                    searchAdapter.filterByType("ALL");
                 } else if (id == R.id.chipMedicines) {
-                    searchAdapter.filter("mg");
+                    searchAdapter.filterByType("MEDICINE");
                 } else if (id == R.id.chipPharmacies) {
-                    searchAdapter.filter("Pharmacy");
+                    searchAdapter.filterByType("PHARMACY");
                 } else if (id == R.id.chipHospitals) {
-                    searchAdapter.filter("Chemist");
+                    searchAdapter.filterByType("HOSPITAL");
                 } else if (id == R.id.chipInStock) {
-                    searchAdapter.filter("Paracetamol");
+                    searchAdapter.filter("In Stock");
                 }
             });
         }
@@ -159,50 +162,64 @@ public class SearchActivity extends AppCompatActivity {
 
     private List<SearchItem> createMockSearchData() {
         List<SearchItem> list = new ArrayList<>();
+        // 1. Medicines
         list.add(new SearchItem(
-                1L,
-                "Paracetamol 500mg",
-                "Apollo Pharmacy",
-                "₹45.00",
-                "Analgesic / Fever",
+                1L, 1L, "Paracetamol 500mg", "500 mg Tablet • Strip of 10",
+                "Apollo Metro Pharmacy", "₹45.00", "Analgesic / Fever",
                 "Fast relief for headaches, musculoskeletal pain and fever",
-                false
+                true, false, "MEDICINE"
         ));
         list.add(new SearchItem(
-                2L,
-                "Amoxicillin 250mg",
-                "MedPlus Wellness",
-                "₹120.00",
-                "Antibiotic",
+                2L, 1L, "Amoxicillin 250mg", "250 mg Capsule • Strip of 6",
+                "Apollo Metro Pharmacy", "₹120.00", "Antibiotic",
                 "Broad-spectrum treatment for bacterial respiratory infections",
-                true
+                true, true, "MEDICINE"
         ));
         list.add(new SearchItem(
-                3L,
-                "Cetirizine 10mg",
-                "CarePoint Chemist",
-                "₹35.00",
-                "Antihistamine",
+                3L, 2L, "Cetirizine 10mg", "10 mg Tablet • Strip of 10",
+                "MedPlus Wellness Store", "₹35.00", "Antihistamine",
                 "24-hour relief from allergies, sneezing and runny nose",
-                false
+                true, false, "MEDICINE"
         ));
         list.add(new SearchItem(
-                4L,
-                "Ibuprofen 400mg",
-                "City Meds",
-                "₹60.00",
-                "NSAID",
+                4L, 2L, "Ibuprofen 400mg", "400 mg Tablet • Strip of 10",
+                "MedPlus Wellness Store", "₹60.00", "NSAID",
                 "Anti-inflammatory pain reliever for dental and body pain",
-                false
+                false, false, "MEDICINE"
         ));
         list.add(new SearchItem(
-                5L,
-                "Metformin 500mg",
-                "HealthLine Pharmacy",
-                "₹85.00",
-                "Diabetes Care",
+                5L, 3L, "Metformin 500mg", "500 mg Tablet • Strip of 15",
+                "CarePoint Chemist", "₹85.00", "Diabetes Care",
                 "First-line medication for type 2 diabetes management",
-                true
+                true, true, "MEDICINE"
+        ));
+
+        // 2. Pharmacies / Shops
+        list.add(new SearchItem(
+                101L, 1L, "Apollo Metro Pharmacy", "Full Retail Pharmacy & Chemist",
+                "Apollo Metro Pharmacy", "Min ₹30.00", "Retail Pharmacy",
+                "Verified 24/7 store with over 5,000 verified medicines in stock",
+                true, false, "PHARMACY"
+        ));
+        list.add(new SearchItem(
+                102L, 2L, "MedPlus Wellness Store", "Wellness & Prescription Chemist",
+                "MedPlus Wellness Store", "Min ₹25.00", "Retail Pharmacy",
+                "Full catalog with doorstep delivery & takeaway options",
+                true, false, "PHARMACY"
+        ));
+
+        // 3. Hospitals
+        list.add(new SearchItem(
+                201L, 3L, "City Care Multispeciality Hospital", "Central Hospital Dispensary",
+                "City Care Hospital Pharmacy", "Min ₹50.00", "Hospital",
+                "24/7 Hospital emergency counter and specialized oncology/cardio dispensary",
+                true, false, "HOSPITAL"
+        ));
+        list.add(new SearchItem(
+                202L, 4L, "Apollo Super Speciality Hospital", "Campus Pharmacy & Dispensary",
+                "Apollo Hospital Dispensary", "Min ₹40.00", "Hospital",
+                "State-of-the-art medical dispensary with cold-chain storage for biologics",
+                true, false, "HOSPITAL"
         ));
         return list;
     }
@@ -214,30 +231,36 @@ public class SearchActivity extends AppCompatActivity {
             public void onSuccess(List<InventoryItem> inventoryItems) {
                 if (progressBar != null) progressBar.setVisibility(View.GONE);
                 if (inventoryItems != null && !inventoryItems.isEmpty()) {
-                    List<SearchItem> liveItems = new ArrayList<>();
+                    // Merge live medicines with existing mock hospitals/pharmacies
+                    List<SearchItem> mergedItems = new ArrayList<>(createMockSearchData());
+                    // Replace only MEDICINE entries with live data
+                    mergedItems.removeIf(item -> "MEDICINE".equalsIgnoreCase(item.getItemType()));
                     for (InventoryItem inv : inventoryItems) {
-                        liveItems.add(new SearchItem(
+                        mergedItems.add(new SearchItem(
                                 inv.getId(),
-                                inv.getBrandName() + (inv.getDosage() != null && !inv.getDosage().isEmpty() ? " " + inv.getDosage() : ""),
+                                1L,
+                                inv.getBrandName(),
+                                inv.getDosage() != null && !inv.getDosage().isEmpty() ? inv.getDosage() : "500 mg Tablet",
                                 "Hospital Central Pharmacy",
                                 String.format(Locale.getDefault(), "₹%.2f", inv.getUnitPrice()),
-                                inv.getDosage() != null && !inv.getDosage().isEmpty() ? inv.getDosage() : "Medication",
+                                inv.getCategory() != null ? inv.getCategory() : "Medication",
                                 "Stock: " + inv.getStockQty() + " units • Batch: " + (inv.getBatchNo() != null ? inv.getBatchNo() : "A101"),
-                                inv.getStockQty() < 10
+                                inv.getStockQty() > 0,
+                                inv.getStockQty() < 10,
+                                "MEDICINE"
                         ));
                     }
                     if (searchAdapter != null) {
-                        searchAdapter.updateData(liveItems);
+                        searchAdapter.updateData(mergedItems);
                     }
-                } else {
-                    fetchBackendPharmaciesSafely();
                 }
+                // On empty result keep mock data as-is
             }
 
             @Override
             public void onFailure(Exception e) {
                 if (progressBar != null) progressBar.setVisibility(View.GONE);
-                fetchBackendPharmaciesSafely();
+                // Keep mock data (including hospitals) intact
             }
         });
     }
@@ -251,9 +274,11 @@ public class SearchActivity extends AppCompatActivity {
                 public void onResponse(Call<List<com.example.pharmago.models.Medicine>> call, Response<List<com.example.pharmago.models.Medicine>> response) {
                     if (progressBar != null) progressBar.setVisibility(View.GONE);
                     if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
-                        List<SearchItem> items = new ArrayList<>();
+                        // Merge live medicines with existing mock hospitals/pharmacies
+                        List<SearchItem> mergedItems = new ArrayList<>(createMockSearchData());
+                        mergedItems.removeIf(item -> "MEDICINE".equalsIgnoreCase(item.getItemType()));
                         for (com.example.pharmago.models.Medicine m : response.body()) {
-                            items.add(new SearchItem(
+                            mergedItems.add(new SearchItem(
                                     m.getId() != null ? m.getId() : 1L,
                                     m.getName(),
                                     "Apollo Hospital Pharmacy",
@@ -264,7 +289,7 @@ public class SearchActivity extends AppCompatActivity {
                             ));
                         }
                         if (searchAdapter != null) {
-                            searchAdapter.updateData(items);
+                            searchAdapter.updateData(mergedItems);
                             if (query != null && !query.trim().isEmpty()) {
                                 searchAdapter.filter(query);
                             }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="14dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="1dp"
     app:strokeWidth="1dp"
     app:strokeColor="@color/border_outline"
@@ -24,6 +24,7 @@
 
             <!-- Rounded Icon Badge -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardItemIcon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:cardCornerRadius="12dp"
@@ -31,12 +32,13 @@
                 app:cardBackgroundColor="@color/primary_container">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:id="@+id/ivItemTypeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_pill"
                     app:tint="@color/primary_clinical_blue"
-                    android:contentDescription="Medicine icon" />
+                    android:contentDescription="Type icon" />
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -46,65 +48,101 @@
                 android:orientation="vertical"
                 android:layout_marginStart="14dp">
 
+                <!-- Medicine / Facility Name -->
                 <TextView
                     android:id="@+id/tvMedicineName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paracetamol 500mg"
+                    android:text="Amoxicillin 500mg"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/neutral_dark" />
+
+                <!-- Dosage Specification -->
+                <TextView
+                    android:id="@+id/tvMedicineDosage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dosage: 500 mg Capsule • Strip of 10"
+                    android:textSize="12.5sp"
+                    android:textColor="@color/neutral_muted"
+                    android:layout_marginTop="2dp" />
 
                 <TextView
                     android:id="@+id/tvMedicineCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category: Analgesic / Antipyretic"
-                    android:textSize="12sp"
+                    android:text="Category: General"
+                    android:textSize="11.5sp"
                     android:textColor="@color/neutral_muted"
-                    android:layout_marginTop="2dp" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
+            <!-- Price Tag -->
+            <TextView
+                android:id="@+id/tvMedicinePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹45.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_clinical_blue" />
+
         </LinearLayout>
 
-        <!-- Dosage & Pharmacy Subtitle -->
+        <!-- Origin Pharmacy & Location -->
         <TextView
             android:id="@+id/tvMedicineDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apollo Pharmacy • Fast relief for fever and mild to moderate pain"
-            android:textSize="13sp"
+            android:text="🏪 Apollo Metro Pharmacy • Sector 4 Campus"
+            android:textSize="12.5sp"
             android:textColor="@color/neutral_muted"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="8dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/border_outline"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
 
+        <!-- Badges & Action Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Pill Badge for In Stock / Prescription Status -->
+            <!-- Stock Badge: Mint for In Stock, Red for Out of Stock -->
+            <TextView
+                android:id="@+id/tvStockBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="In Stock"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/secondary_mint"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/secondary_container"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp" />
+
+            <!-- Prescription Badge: Amber outline for Rx Required, Grey for OTC -->
             <TextView
                 android:id="@+id/tvPrescriptionStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✅ In Stock / OTC"
-                android:textSize="12sp"
+                android:layout_marginStart="8dp"
+                android:text="Rx Required"
+                android:textSize="11.5sp"
                 android:textStyle="bold"
-                android:textColor="@color/success_green"
+                android:textColor="@color/on_warning_container"
                 android:background="@drawable/badge_bg"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp" />
+                android:backgroundTint="@color/warning_container"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp" />
 
             <View
                 android:layout_width="0dp"
@@ -116,14 +154,12 @@
                 android:id="@+id/btnSelectMedicine"
                 style="@style/Widget.PharmaGo.Button.Primary"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Select"
-                android:textSize="13sp"
+                android:layout_height="38dp"
+                android:text="View Store"
+                android:textSize="12.5sp"
                 android:textAllCaps="false"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="0dp"
-                android:paddingBottom="0dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="0dp"
                 app:cornerRadius="10dp" />
 
         </LinearLayout>
